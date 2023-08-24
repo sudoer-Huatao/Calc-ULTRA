@@ -8,6 +8,7 @@
 
 
 I hope you find it useful!
+(Please full screen your console/terminal for better experience!)
 
 Required Python modules: This program requires the Sympy, SciPy, NumPy, and MatPlotLib modules.
 
