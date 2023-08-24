@@ -4,6 +4,7 @@
 - Multifunctional, user-friendly Derivative Integral Calculator!
 - No Python background knowledge needed.
 - Supports derivatives, antiderivatives, and definite integrals - with a graph!
+
 Note: Please FULL SCREEN your console/terminal for better experience!
 <img width="1710" alt="截屏2023-08-24 11 54 58" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Derivative-Integral-Calculator/assets/135504586/d250f281-74e8-443d-8730-cded50f1688c">
 
