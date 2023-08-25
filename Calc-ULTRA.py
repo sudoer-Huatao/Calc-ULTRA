@@ -123,7 +123,7 @@ def integ():
     print(" | (This calculator DOES NOT support Factorials, Absolute Value Functions, and other functions!) |")
     print("  -----------------------------------------------------------------------------------------------")
     while True:
-        try:
+        #try:
             print("\n(Current Screen: InteCalc Main Screen)\n")
             cmd = input("Enter Command: ")
             if cmd == "help":
@@ -157,18 +157,22 @@ def integ():
                     lbound = input("\nEnter the lower bound: ")
                     if ("pi" in lbound):
                         lbound = lbound.replace("pi", str(math.pi))
+                        lbound = eval(lbound)
                         lbound = float(lbound)
                     elif ("e" in lbound):
                         lbound = lbound.replace("e", str(math.e))
+                        lbound = eval(lbound)
                         lbound = float(lbound)
                     else:
                         lbound = float(lbound)
                     rbound = input("Enter the upper bound: ")
                     if ("pi" in rbound):
                         rbound = rbound.replace("pi", str(math.pi))
+                        rbound = eval(rbound)
                         rbound = float(rbound)
                     elif ("e" in rbound):
                         rbound = rbound.replace("e", str(math.e))
+                        rbound = eval(rbound)
                         rbound = float(rbound)
                     else:
                         rbound = float(rbound)
@@ -205,8 +209,8 @@ def integ():
                 quit()
             else:
                 print("\nError 002: Invalid command.")
-        except:
-            print("\nError 001: An unknown error occured.")
+        #except:
+            # print("\nError 001: An unknown error occured.")
 
 
 main()
