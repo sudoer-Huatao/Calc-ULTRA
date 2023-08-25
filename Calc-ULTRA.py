@@ -2,7 +2,6 @@ from sympy.utilities.lambdify import lambdify
 from sympy import *
 import sympy as sp
 from scipy.integrate import *
-# from scipy import integrate
 from math import *
 import numpy as np
 import math
@@ -38,7 +37,7 @@ def main():
         elif cmd_main == "2":
             integ()
         elif cmd_main == "exit":
-            print("\nExiting Calculator ... ... ...\n")
+            print("\nExiting Calc-ULTRA ... ... ...\n")
             break
             quit()
         else:
@@ -60,13 +59,13 @@ def deriv():
     print("  +---   +----  |   \  --+--      v   /       \  +----  /       \  +----  +----\n")
     print("   ---------------------------------------------------------------------------\n")
     print("                            The Derivative Calculator\n")
-    print("\nThis calculator supports:\n - Special numbers including Pi and e;")
+    print("\nDerivaCalc supports:\n - Special numbers including Pi and e;")
     print(" - Basic Trigonometric Functions;\n - Exponents and Logarithms (input format: log<base>(x));")
     print(" - Inverse Trigonometric Functions (input format: 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
     print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
     print(" - Other Functions such as the Factorial function factorial(x), the Error Function erf(x) and more!")
     print("(Full list available on https://docs.python.org/3/library/math.html)\n")
-    print("\nCommands:\n", "\n - Type 'start' in the main screen to start the calculator!")
+    print("\nCommands:\n", "\n - Type 'start' in the main screen to start derivative computation!")
     print(" - Type 'help' in the main screen for a list of operations in Python;")
     print(" - Type 'exit' to quit DerivaCalc")
     print("(This version only supports single variable calculus)")
@@ -91,7 +90,7 @@ def deriv():
                 else:
                     break
             elif cmd == "exit":
-                print("\nExiting Calculator ... ... ...")
+                print("\nExiting DerivaCalc ... ... ...")
                 break
                 quit()
             else:
@@ -109,21 +108,21 @@ def integ():
     print("  --+--  |    \|     |     +----  +----  /       \  +----  +----")
     print("\n   ------------------------------------------------------------")
     print("\n                      The Integral Calculator\n")
-    print("\nThis calculator supports:\n - Special numbers including Pi and e;")
+    print("\nInteCalc supports:\n - Special numbers including Pi and e;")
     print(" - Basic Trigonometric Functions;\n", "- Exponents (for exponent with base e, input as 'exp(x)', NOT e**x);")
     print(" - The Natural Logarithm (input as log(x));")
     print(" - Inverse Trigonometric Functions (input format: 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
     print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
     print("(Full list of Python Math functions available on https://docs.python.org/3/library/math.html)\n")
-    print("\nCommands:\n", "\n - Type 'istart' in the main screen to start the antiderivative (indefinite integral) calculator!")
-    print(" - Type 'dstart' in the main screen to start the definite integral calculator with a graph!")
+    print("\nCommands:\n", "\n - Type 'istart' in the main screen to start antiderivative (indefinite integral) calculation!")
+    print(" - Type 'dstart' in the main screen to start definite integral calculation - with a graph!")
     print(" - Type 'help' in the main screen for a list of operations in Python")
     print(" - Type 'exit' to quit InteCalc")
-    print("\n  -----------------------------------------------------------------------------------------------")
-    print(" | (This calculator DOES NOT support Factorials, Absolute Value Functions, and other functions!) |")
-    print("  -----------------------------------------------------------------------------------------------")
+    print("\n  ----------------------------------------------------------------------------------------")
+    print(" | (InteCalc DOES NOT support Factorials, Absolute Value Functions, and other functions!) |")
+    print("  ----------------------------------------------------------------------------------------")
     while True:
-        #try:
+        try:
             print("\n(Current Screen: InteCalc Main Screen)\n")
             cmd = input("Enter Command: ")
             if cmd == "help":
@@ -183,7 +182,7 @@ def integ():
                     print("\nShow graph of area? (y/n)")
                     show = input("(Exit the graph window when you are finished to continue) ")
                     if show == "y":
-                        print("\nLoading graph. Might take some time ...")
+                        print("\nLoading graph. Might take some time on first startup ...")
                         x = np.linspace((lbound - 8), (rbound + 8), 200000)
                         if ("ln" in f or "log" in f):
                             x = np.linspace(int(math.floor(lbound)) + 1, int(math.ceil(rbound)) + 8, 200000)
@@ -204,13 +203,13 @@ def integ():
                         return "\nExiting Definite Integral Screen ...\n"
                 print(d_integrate())
             elif cmd == "exit":
-                print("\nExiting Calculator ... ... ...")
+                print("\nExiting InteCalc ... ... ...")
                 break
                 quit()
             else:
                 print("\nError 002: Invalid command.")
-        #except:
-            # print("\nError 001: An unknown error occured.")
+        except:
+            print("\nError 001: An unknown error occured.")
 
 
 main()
