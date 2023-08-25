@@ -60,8 +60,9 @@ def deriv():
     print("   ---------------------------------------------------------------------------\n")
     print("                            The Derivative Calculator\n")
     print("\nDerivaCalc supports:\n - Special numbers including Pi and e;")
-    print(" - Basic Trigonometric Functions;\n - Exponents and Logarithms (input format: log<base>(x));")
-    print(" - Inverse Trigonometric Functions (input format: 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
+    print(" - Basic Trigonometric Functions;\n - Exponents (for exponent with base e, input as 'exp(x)', NOT e**x);")
+    print(" - The Natural Logarithm (input as log(x));")
+    print(" - Inverse Trigonometric Functions (input as 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
     print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
     print(" - Other Functions such as the Factorial function factorial(x), the Error Function erf(x) and more!")
     print("(Full list available on https://docs.python.org/3/library/math.html)\n")
@@ -80,15 +81,16 @@ def deriv():
                 print("\n(Current Screen: Derivative Screen)\n")
                 f = input("Enter a function: ")
                 if ("^" in f):
-                    f= f.replace("^", "**")
+                    f = f.replace("^", "**")
                 x = symbols("x")
                 df = diff(f, x)
                 print("\nDerivative is", df)
                 dsimp = input("\nSimplify? (y/n) ")
                 if dsimp == "y":
-                    print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
-                else:
-                    break
+                    if str(sp.simplify(df, evaluate = False)) == str(df):
+                        print("\n(No simplification of answer found.)")
+                    else:
+                        print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
             elif cmd == "exit":
                 print("\nExiting DerivaCalc ... ... ...")
                 break
@@ -96,7 +98,7 @@ def deriv():
             else:
                 print("\nError 002: Invalid command.")
         except:
-            print("\nError 001: An unknown error occured.\n")
+            print("\nError 001: An unknown error occured.")
 
 
 def integ():
@@ -111,7 +113,7 @@ def integ():
     print("\nInteCalc supports:\n - Special numbers including Pi and e;")
     print(" - Basic Trigonometric Functions;\n", "- Exponents (for exponent with base e, input as 'exp(x)', NOT e**x);")
     print(" - The Natural Logarithm (input as log(x));")
-    print(" - Inverse Trigonometric Functions (input format: 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
+    print(" - Inverse Trigonometric Functions (input as 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
     print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
     print("(Full list of Python Math functions available on https://docs.python.org/3/library/math.html)\n")
     print("\nCommands:\n", "\n - Type 'istart' in the main screen to start antiderivative (indefinite integral) calculation!")
@@ -138,12 +140,14 @@ def integ():
                 else:
                     str(f)
                 x = sp.Symbol("x")
-                print("\nAntiderivative is:", sp.integrate(f, x), "+ C")
+                F = sp.integrate(f, x)
+                print("\nAntiderivative is:", F, "+ C")
                 isimp = input("\nSimplify? (y/n) ")
                 if isimp == "y":
-                    print("\nSimplified: ", sp.integrate(f, x), "-->", simplify(sp.integrate(f,x), evaluate = False))
-                else:
-                    break
+                    if str(sp.simplify(F, evaluate = False)) == str(F):
+                        print("\n(No simplification of answer found.)")
+                    else:
+                        print("\nSimplified:", F, "-->", sp.simplify(F, evaluate = False))
             elif cmd == "dstart":
                 print("\n(Current Screen: Definite Integral Screen)\n")
                 def d_integrate():
