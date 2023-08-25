@@ -124,7 +124,7 @@ def integ():
     print(" | (InteCalc DOES NOT support Factorials, Absolute Value Functions, and other functions!) |")
     print("  ----------------------------------------------------------------------------------------")
     while True:
-        try:
+        #try:
             print("\n(Current Screen: InteCalc Main Screen)\n")
             cmd = input("Enter Command: ")
             if cmd == "help":
@@ -192,8 +192,10 @@ def integ():
                             x = np.linspace(int(math.floor(lbound)) + 1, int(math.ceil(rbound)) + 8, 200000)
                         y = [g(a) for a in x]
                         fig, ax = plt.subplots()
-                        plt.xlabel("$x$")
-                        plt.ylabel("$f(x)$")
+                        title = "Shaded area beneath function"
+                        plt.title(title)
+                        plt.xlabel("x")
+                        plt.ylabel("y", rotation = 0)
                         plt.grid()
                         plt.plot(x,y, color = "red")
                         ix = np.linspace(lbound, rbound)
@@ -212,8 +214,8 @@ def integ():
                 quit()
             else:
                 print("\nError 002: Invalid command.")
-        except:
-            print("\nError 001: An unknown error occured.")
+        #except:
+            # print("\nError 001: An unknown error occured.")
 
 
 main()
