@@ -2,7 +2,7 @@ from sympy.utilities.lambdify import lambdify
 from sympy import *
 import sympy as sp
 from scipy.integrate import *
-# from scipy import integrate
+from scipy import integrate
 from math import *
 import numpy as np
 import math
@@ -123,7 +123,7 @@ def integ():
     print(" | (This calculator DOES NOT support Factorials, Absolute Value Functions, and other functions!) |")
     print("  -----------------------------------------------------------------------------------------------")
     while True:
-        try:
+        # try:
             print("\n(Current Screen: InteCalc Main Screen)\n")
             cmd = input("Enter Command: ")
             if cmd == "help":
@@ -148,12 +148,12 @@ def integ():
             elif cmd == "dstart":
                 print("\n(Current Screen: Definite Integral Screen)\n")
                 def d_integrate():
-                    def g(x):
-                        final = eval(f)
+                    def f(x):
+                        final = eval(g)
                         return final
-                    f = input("Enter the function you want to integrate: ")
-                    if ("^" in f):
-                        f = f.replace("^", "**")
+                    g = input("Enter the function you want to integrate: ")
+                    if ("^" in g):
+                        g = g.replace("^", "**")
                     lbound = input("\nEnter the lower bound: ")
                     if ("pi" in lbound):
                         lbound = lbound.replace("pi", str(math.pi))
@@ -172,25 +172,25 @@ def integ():
                         rbound = float(rbound)
                     else:
                         rbound = float(rbound)
-                    if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)):
+                    if (("1/x" in g or g == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)):
                         return("\nDiverging integral. Cannot solve.")
                     x = sp.Symbol("x")
-                    print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is", sp.integrate(g(x), (x, lbound, rbound)))
+                    print("\nCalculated integral of", g, "from", lbound, "to", rbound, ". Final area is", sp.integrate(f, (x, lbound, rbound)))
                     print("\nShow graph of area? (y/n)")
                     show = input("(Exit the graph window when you are finished to continue) ")
                     if show == "y":
                         print("\nLoading graph. Might take some time ...")
                         x = np.linspace((lbound - 8), (rbound + 8), 200000)
-                        if ("ln" in f or "log" in f):
+                        if ("ln" in g or "log" in g):
                             x = np.linspace(int(math.floor(lbound)) + 1, int(math.ceil(rbound)) + 8, 200000)
-                        y = [g(a) for a in x]
+                        y = [f(a) for a in x]
                         fig, ax = plt.subplots()
                         plt.xlabel("$x$")
                         plt.ylabel("$f(x)$")
                         plt.grid()
                         plt.plot(x,y, color = "red")
                         ix = np.linspace(lbound, rbound)
-                        iy = [g(i) for i in ix]
+                        iy = [f(i) for i in ix]
                         verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
                         poly = Polygon(verts, facecolor = "blue")
                         ax.add_patch(poly)
@@ -205,8 +205,8 @@ def integ():
                 quit()
             else:
                 print("\nError 002: Invalid command.")
-        except:
-            print("\nError 001: An unknown error occured.")
+        #except:
+            # print("\nError 001: An unknown error occured.")
 
 
 main()
