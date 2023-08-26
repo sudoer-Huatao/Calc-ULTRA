@@ -76,7 +76,7 @@ def deriv():
             cmd = input("Enter Command: ")
             if cmd == "help":
                 print("\nBasic operations: \n", "+: add \n", "-: minus \n", "*: multiply \n", "/: divide \n", "**: exponent")
-                print("%: return the remainder of a division \n", "//: return the rounded-down quotient of a division")
+                print(" %: return the remainder of a division \n", "//: return the rounded-down quotient of a division")
             elif cmd == "start":
                 print("\n(Current Screen: Derivative Screen)\n")
                 f = input("Enter a function: ")
@@ -124,7 +124,7 @@ def integ():
     print(" | (InteCalc DOES NOT support Factorials, Absolute Value Functions, and other functions!) |")
     print("  ----------------------------------------------------------------------------------------")
     while True:
-        #try:
+        try:
             print("\n(Current Screen: InteCalc Main Screen)\n")
             cmd = input("Enter Command: ")
             if cmd == "help":
@@ -182,31 +182,35 @@ def integ():
                     if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)):
                         return("\nDiverging integral. Cannot solve.")
                     x = sp.Symbol("x")
-                    print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is", sp.integrate(f, (x, lbound, rbound)))
-                    print("\nShow graph of area? (y/n)")
-                    show = input("(Exit the graph window when you are finished to continue) ")
-                    if show == "y":
-                        print("\nLoading graph. Might take some time on first startup ...")
-                        x = np.linspace((lbound - 8), (rbound + 8), 200000)
-                        if ("ln" in f or "log" in f):
-                            x = np.linspace(int(math.floor(lbound)) + 1, int(math.ceil(rbound)) + 8, 200000)
-                        y = [g(a) for a in x]
-                        fig, ax = plt.subplots()
-                        title = "Shaded area beneath function"
-                        plt.title(title)
-                        plt.xlabel("x")
-                        plt.ylabel("y", rotation = 0)
-                        plt.grid()
-                        plt.plot(x,y, color = "red")
-                        ix = np.linspace(lbound, rbound)
-                        iy = [g(i) for i in ix]
-                        verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
-                        poly = Polygon(verts, facecolor = "blue")
-                        ax.add_patch(poly)
-                        plt.show()
-                        return "\nExited graph."
-                    elif show == "n":
-                        return "\nExiting Definite Integral Screen ...\n"
+                    if str(sp.integrate(f, (x, lbound, rbound))) == "nan":
+                        return "\nIntegral does not converge. Cannot Solve."
+                    else:
+                        print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is", sp.integrate(f, (x, lbound, rbound)))
+                        print("\nShow graph of area? (y/n)")
+                        show = input("(Exit the graph window when you are finished to continue) ")
+                        if show == "y":
+                            print("\nLoading graph. Might take some time on first startup ...")
+                            x = np.linspace((lbound - 8), (rbound + 8), 200000)
+                            if ("ln" in f or "log" in f):
+                                x = np.linspace(int(math.floor(lbound)) + 1, int(math.ceil(rbound)) + 8, 200000)
+                            y = [g(a) for a in x]
+                            fig, ax = plt.subplots()
+                            title = "Shaded area beneath function"
+                            plt.title(title)
+                            plt.xlabel("x")
+                            plt.ylabel("y", rotation = 0)
+                            plt.plot(x,y, color = "red")
+                            plt.axis([lbound - 8, rbound + 8, lbound - 8, rbound + 8])
+                            plt.grid()
+                            ix = np.linspace(lbound, rbound)
+                            iy = [g(i) for i in ix]
+                            verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
+                            poly = Polygon(verts, facecolor = "blue")
+                            ax.add_patch(poly)
+                            plt.show()
+                            return "\nExited graph."
+                        elif show == "n":
+                            return "\nExiting Definite Integral Screen ...\n"
                 print(d_integrate())
             elif cmd == "exit":
                 print("\nExiting InteCalc ... ... ...")
@@ -214,8 +218,8 @@ def integ():
                 quit()
             else:
                 print("\nError 002: Invalid command.")
-        #except:
-            # print("\nError 001: An unknown error occured.")
+        except:
+            print("\nError 001: An unknown error occured.")
 
 
 main()
