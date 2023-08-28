@@ -94,7 +94,6 @@ def deriv():
             elif cmd == "exit":
                 print("\nExiting DerivaCalc ... ... ...")
                 break
-                quit()
             else:
                 print("\nError 002: Invalid command.")
         except:
@@ -159,22 +158,22 @@ def integ():
                         f = f.replace("^", "**")
                     lbound = input("\nEnter the lower bound: ")
                     if ("pi" in lbound):
-                        lbound = lbound.replace("pi", str(math.pi))
+                        lbound = lbound.replace("pi", str(sp.core.numbers.pi))
                         lbound = eval(lbound)
                         lbound = float(lbound)
                     elif ("e" in lbound):
-                        lbound = lbound.replace("e", str(math.e))
+                        lbound = lbound.replace("e", str(sp.core.numbers.Expl))
                         lbound = eval(lbound)
                         lbound = float(lbound)
                     else:
                         lbound = float(lbound)
                     rbound = input("Enter the upper bound: ")
                     if ("pi" in rbound):
-                        rbound = rbound.replace("pi", str(math.pi))
+                        rbound = rbound.replace("pi", str(sp.core.numbers.pi))
                         rbound = eval(rbound)
                         rbound = float(rbound)
                     elif ("e" in rbound):
-                        rbound = rbound.replace("e", str(math.e))
+                        rbound = rbound.replace("e", str(sp.core.numbers.Expl))
                         rbound = eval(rbound)
                         rbound = float(rbound)
                     else:
@@ -182,10 +181,10 @@ def integ():
                     if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)):
                         return("\nDiverging integral. Cannot solve.")
                     x = sp.Symbol("x")
-                    if str(sp.integrate(f, (x, lbound, rbound))) == "nan":
+                    if str(integrate(f, (x, lbound, rbound))) == "nan":
                         return "\nIntegral does not converge. Cannot Solve."
                     else:
-                        print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is", sp.integrate(f, (x, lbound, rbound)))
+                        print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is", integrate(f, (x, lbound, rbound)).evalf())
                         print("\nShow graph of area? (y/n)")
                         show = input("(Exit the graph window when you are finished to continue) ")
                         if show == "y":
@@ -215,7 +214,6 @@ def integ():
             elif cmd == "exit":
                 print("\nExiting InteCalc ... ... ...")
                 break
-                quit()
             else:
                 print("\nError 002: Invalid command.")
         except:
