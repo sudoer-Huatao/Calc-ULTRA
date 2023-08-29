@@ -41,7 +41,7 @@ def main():
             break
             quit()
         else:
-            print("\nError 001: Unknown command.")
+            print("\nError 001: '", cmd_main, "' is an invalid command.")
 
 '''
 Hey, you! Stop looking at my code, copycats! Quit the code now!
@@ -69,7 +69,7 @@ def deriv():
     print("\nCommands:\n", "\n - Type 'start' in the main screen to start derivative computation!")
     print(" - Type 'help' in the main screen for a list of operations in Python;")
     print(" - Type 'exit' to quit DerivaCalc")
-    print("(This version only supports single variable calculus)")
+    print("\n(This version only supports single variable calculus)")
     while True:
         try:
             print("\n(Current Screen: DerivaCalc Main Screen)\n")
@@ -85,17 +85,15 @@ def deriv():
                 x = symbols("x")
                 df = diff(f, x)
                 print("\nDerivative is", df)
-                dsimp = input("\nSimplify? (y/n) ")
-                if dsimp == "y":
-                    if str(sp.simplify(df, evaluate = False)) == str(df):
-                        print("\n(No simplification of answer found.)")
-                    else:
+                if str(sp.simplify(df, evaluate = False)) != str(df):
+                    dsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
+                    if dsimp == "y":
                         print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
             elif cmd == "exit":
                 print("\nExiting DerivaCalc ... ... ...")
                 break
             else:
-                print("\nError 002: Invalid command.")
+                print("\nError 002: '", cmd, "' is an invalid command.")
         except:
             print("\nError 001: An unknown error occured.")
 
@@ -119,9 +117,8 @@ def integ():
     print(" - Type 'dstart' in the main screen to start definite integral calculation - with a graph!")
     print(" - Type 'help' in the main screen for a list of operations in Python")
     print(" - Type 'exit' to quit InteCalc")
-    print("\n  ----------------------------------------------------------------------------------------")
-    print(" | (InteCalc DOES NOT support Factorials, Absolute Value Functions, and other functions!) |")
-    print("  ----------------------------------------------------------------------------------------")
+    print("\n(This version only supports single variable calculus)")
+    print("(Absolute value function and factorial function is only supported by definite integral computation!)")
     while True:
         try:
             print("\n(Current Screen: InteCalc Main Screen)\n")
@@ -133,20 +130,21 @@ def integ():
                 print("\n(Current Screen: Antiderivative Screen)\n")
                 f = input("Enter a function: ")
                 if ("pi" in f):
-                    f = f.replace("pi", str(math.pi))
+                    f = f.replace("pi", str(sp.core.numbers.pi))
                 if ("^" in f):
                     f = f.replace("^", "**")
                 else:
                     str(f)
-                x = sp.Symbol("x")
-                F = sp.integrate(f, x)
-                print("\nAntiderivative is:", F, "+ C")
-                isimp = input("\nSimplify? (y/n) ")
-                if isimp == "y":
-                    if str(sp.simplify(F, evaluate = False)) == str(F):
-                        print("\n(No simplification of answer found.)")
-                    else:
-                        print("\nSimplified:", F, "-->", sp.simplify(F, evaluate = False))
+                x = Symbol("x")
+                F = Integral(f, x)
+                if ("Integral" in str(F.doit())):
+                    print("\nCannot compute integral.")
+                else:
+                    print("\nAntiderivative is:", F.doit())
+                    if str(sp.simplify(F.doit(), evaluate = False)) != str(F.doit()):
+                        isimp = input("\nSimplification of answer found. Simplify? (y/n) ")
+                        if isimp == "y":
+                            print("\nSimplified:", F.doit(), "-->", sp.simplify(F.doit(), evaluate = False))
             elif cmd == "dstart":
                 print("\n(Current Screen: Definite Integral Screen)\n")
                 def d_integrate():
@@ -162,7 +160,7 @@ def integ():
                         lbound = eval(lbound)
                         lbound = float(lbound)
                     elif ("e" in lbound):
-                        lbound = lbound.replace("e", str(sp.core.numbers.Expl))
+                        lbound = lbound.replace("e", str(sp.core.numbers.Exp1))
                         lbound = eval(lbound)
                         lbound = float(lbound)
                     else:
@@ -173,7 +171,7 @@ def integ():
                         rbound = eval(rbound)
                         rbound = float(rbound)
                     elif ("e" in rbound):
-                        rbound = rbound.replace("e", str(sp.core.numbers.Expl))
+                        rbound = rbound.replace("e", str(sp.core.numbers.Exp1))
                         rbound = eval(rbound)
                         rbound = float(rbound)
                     else:
@@ -215,7 +213,7 @@ def integ():
                 print("\nExiting InteCalc ... ... ...")
                 break
             else:
-                print("\nError 002: Invalid command.")
+                print("\nError 002: '", cmd, "' is an invalid command.")
         except:
             print("\nError 001: An unknown error occured.")
 
