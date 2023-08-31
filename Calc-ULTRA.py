@@ -1,5 +1,6 @@
 from sympy.utilities.lambdify import lambdify
 from sympy import *
+from sympy import E
 import sympy as sp
 from scipy.integrate import *
 from math import *
@@ -160,7 +161,7 @@ def integ():
                         lbound = eval(lbound)
                         lbound = float(lbound)
                     elif ("e" in lbound):
-                        lbound = lbound.replace("e", str(sp.core.numbers.Exp1))
+                        lbound = lbound.replace("e", str(E))
                         lbound = eval(lbound)
                         lbound = float(lbound)
                     else:
@@ -171,7 +172,7 @@ def integ():
                         rbound = eval(rbound)
                         rbound = float(rbound)
                     elif ("e" in rbound):
-                        rbound = rbound.replace("e", str(sp.core.numbers.Exp1))
+                        rbound = rbound.replace("e", str(E))
                         rbound = eval(rbound)
                         rbound = float(rbound)
                     else:
@@ -207,7 +208,7 @@ def integ():
                             plt.show()
                             return "\nExited graph."
                         elif show == "n":
-                            return "\nExiting Definite Integral Screen ...\n"
+                            return "\nExiting Definite Integral Screen ..."
                 print(d_integrate())
             elif cmd == "exit":
                 print("\nExiting InteCalc ... ... ...")
