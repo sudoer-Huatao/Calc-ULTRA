@@ -198,7 +198,10 @@ def integ():
                             plt.xlabel("x")
                             plt.ylabel("y", rotation = 0)
                             plt.plot(x,y, color = "red")
-                            plt.axis([lbound - 5, rbound + 5, float(g(round(lbound))) - 2, float(g(round(rbound))) + 2])
+                            if float(g(lbound)) < 0:
+                                plt.axis([lbound - 5, rbound + 5, float(g(round(lbound))) - 2, float(g(round(rbound))) + 2])
+                            else:
+                                plt.axis([lbound - 5, rbound + 5, -2, float(g(round(rbound))) + 2])
                             plt.grid()
                             ix = np.linspace(lbound, rbound)
                             iy = [g(i) for i in ix]
