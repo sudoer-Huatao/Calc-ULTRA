@@ -194,8 +194,8 @@ def integ():
                             fig, ax = plt.subplots()
                             title = "Shaded area beneath function"
                             plt.title(title)
-                            plt.xlabel("x")
-                            plt.ylabel("y", rotation = 0)
+                            plt.xlabel("x", weight = "bold")
+                            plt.ylabel("y", rotation = 0, weight = "bold")
                             plt.plot(x,y, color = "red")
                             if float(g(lbound)) < 0:
                                 plt.axis([lbound - 5, rbound + 5, float(g(round(lbound))) - 2, float(g(round(rbound))) + 2])
