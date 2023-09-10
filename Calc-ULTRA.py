@@ -1,4 +1,3 @@
-from sympy.utilities.lambdify import lambdify
 from sympy import *
 from sympy import E
 import sympy as sp
@@ -22,7 +21,7 @@ def main():
     print("  |         / \     |       |          |   |  |      |    |   |     / \     |")
     print("  |        / - \    |       |      --  |   |  |      |    |---+    / - \    |")
     print("  |       /     \   |       |          |   |  |      |    |  \    /     \ ")
-    print("  +----  /       \  +----+  +----      +---+  +----  |    |   \  /       \  0")
+    print("  +----  /       \  +-----  +----      +---+  +----  |    |   \  /       \  0")
     print("\n   -------------------------------------------------------------------------")
     print("\n               ------------------------------------------------")
     print("              | The ULTIMATE Derivative - Integral Calculator! |")
