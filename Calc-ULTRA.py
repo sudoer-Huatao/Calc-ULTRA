@@ -5,6 +5,7 @@ from math import *
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import pendulum
 from matplotlib.patches import Polygon
 import warnings
 
@@ -26,6 +27,9 @@ def main():
     print("              | The ULTIMATE Derivative - Integral Calculator! |")
     print("               ------------------------------------------------")
     while True:
+        now = pendulum.now()
+        dt = now.format("Y-MM-DD HH:mm:ss")
+        print("\n( Time now is:", dt, " )")
         print("\nCommands:\n\n - Type '1' to access DerivaCalc, the Derivative Calculator!")
         print(" - Type '2' to access InteCalc, the Integral Calculator!")
         print(" - Type 'exit' to quit Calc-ULTRA")
