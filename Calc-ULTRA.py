@@ -1,5 +1,4 @@
 from sympy import *
-from sympy import E
 import sympy as sp
 from scipy.integrate import *
 from math import *
@@ -26,10 +25,10 @@ def main():
     print("\n               ------------------------------------------------")
     print("              | The ULTIMATE Derivative - Integral Calculator! |")
     print("               ------------------------------------------------")
-    print("\nCommands:\n\n - Type '1' to access DerivaCalc, the Derivative Calculator!")
-    print(" - Type '2' to access InteCalc, the Integral Calculator!")
-    print(" - Type 'exit' to quit Calc-ULTRA")
     while True:
+        print("\nCommands:\n\n - Type '1' to access DerivaCalc, the Derivative Calculator!")
+        print(" - Type '2' to access InteCalc, the Integral Calculator!")
+        print(" - Type 'exit' to quit Calc-ULTRA")
         print("\n(Current Screen: Main Screen)\n")
         cmd_main = input("Enter Command: ")
         if cmd_main == "1":
@@ -39,7 +38,6 @@ def main():
         elif cmd_main == "exit":
             print("\nExiting Calc-ULTRA ... ... ...\n")
             break
-            quit()
         else:
             print("\nError 001: '", cmd_main, "' is an invalid command.")
 
