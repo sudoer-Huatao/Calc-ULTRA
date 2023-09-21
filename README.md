@@ -23,7 +23,7 @@ To run this project, simply open the Calc-ULTRA.py file and run it.
 
 # Acknowledgements
 
-A general thank-you to all GitHub users who gave feedback,
+A general thank-you to all GitHub users who gave feedback and/or starred this repository,
 and a SPECIAL THANK-YOU to @Haobot for troubleshooting and feedback!
 
 This program was made using SymPy and SciPy for calculation and Matplotlib and NumPy for graphing.
