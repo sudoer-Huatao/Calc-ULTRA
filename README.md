@@ -13,7 +13,7 @@ This is a multi-functional, user-friendly Calculus Calculator!
 This program requires the Sympy, SciPy, NumPy, and MatPlotLib modules.
 
 # Warning
-Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) is available to both types of integrals, but the Absolute Value and Factorial functions are only available to definite integral calculations and the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't.
+Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't.
 
 <img width="1627" alt="截屏2023-09-10 15 51 40" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Derivative-Integral-Calculator/assets/135504586/f45aa5df-1ff7-4503-ad72-1847834706a6">
 
@@ -23,7 +23,8 @@ To run this project, simply open the Calc-ULTRA.py file and run it.
 
 # Acknowledgements
 
-A special thanks to @Haobot for troubleshooting and feedback.
+A general thank-you to all GitHub users who gave feedback,
+and a SPECIAL THANK-YOU to @Haobot for troubleshooting and feedback!
 
 This program was made using SymPy and SciPy for calculation and Matplotlib and NumPy for graphing.
 
