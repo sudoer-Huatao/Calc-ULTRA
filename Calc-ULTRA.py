@@ -10,7 +10,7 @@ from matplotlib.patches import Polygon
 import warnings
 
 
-# This program requires the Sympy, SciPy, NumPy, and MatPlotLib modules!
+# This program requires the Sympy, SciPy, NumPy, Pendulum, and MatPlotLib modules!
 
 warnings.filterwarnings("ignore")
 
@@ -43,7 +43,7 @@ def main():
             print("\nExiting Calc-ULTRA ... ... ...\n")
             break
         else:
-            print("\nError 001: '", cmd_main, "' is an invalid command.")
+            print("\nCommandError: '", cmd_main, "' is an invalid command")
 
 '''
 Hey, you! Stop looking at my code, copycats! Quit the code now!
@@ -81,23 +81,44 @@ def deriv():
                 print(" %: return the remainder of a division \n", "//: return the rounded-down quotient of a division")
             elif cmd == "start":
                 print("\n(Current Screen: Derivative Screen)\n")
-                f = input("Enter a function: ")
-                if ("^" in f):
-                    f = f.replace("^", "**")
-                x = symbols("x")
-                df = diff(f, x)
-                print("\nDerivative is", df)
-                if str(sp.simplify(df, evaluate = False)) != str(df):
-                    dsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
-                    if dsimp == "y":
-                        print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
+                opt = input("Choose option: normal derivative computation ('n') or implicit derivative computation ('i'): ")
+                if opt == "n":
+                    f = input("\nEnter a function: ")
+                    if ("^" in f):
+                        f = f.replace("^", "**")
+                    x = symbols("x")
+                    fnum = int(input("Enter the order of derivative calculation: "))
+                    if fnum < 0:
+                        return "\nOrderError: Order of derivative calculation is smaller than 0."
+                    df = diff(f, x, fnum)
+                    print("\nDerivative of",f,"with order",fnum,"is", df)
+                    if str(sp.simplify(df, evaluate = False)) != str(df):
+                        dsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
+                        if dsimp == "y":
+                            print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
+                elif opt == "i":
+                    circ = input("\nEnter an equation containing x and y: ")
+                    if ("^" in circ):
+                        circ = circ.replace("^", "**")
+                    x,y = symbols('x,y')
+                    fnum = int(input("Enter the order of derivative calculation: "))
+                    if fnum < 0:
+                        return "\nOrderError: Order of derivative calculation is smaller than 0."
+                    df = idiff(eval(circ), y, x, fnum)
+                    print("\nDerivative of order",fnum,"is", df)
+                    if str(sp.simplify(df, evaluate = False)) != str(df):
+                        dsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
+                        if dsimp == "y":
+                            print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
+                else:
+                    print("\nCommandError: '", opt, "' is an invalid command")
             elif cmd == "exit":
                 print("\nExiting DerivaCalc ... ... ...")
                 break
             else:
-                print("\nError 002: '", cmd, "' is an invalid command.")
+                print("\nCommandError: '", cmd, "' is an invalid command.")
         except:
-            print("\nError 001: An unknown error occured.")
+            print("\nUnknownError: An unknown error occured.")
 
 
 def integ():
@@ -157,6 +178,8 @@ def integ():
                     if ("^" in f):
                         f = f.replace("^", "**")
                     lbound = input("\nEnter the lower bound: ")
+                    if (lbound.isnumeric() == False) and ("pi" not in lbound) and ("e" not in lbound) and ("-" not in lbound) and ("." not in lbound):
+                        return "\nTypeError: Lower bound is a not a number."
                     if ("pi" in lbound):
                         lbound = lbound.replace("pi", str(sp.core.numbers.pi))
                         lbound = eval(lbound)
@@ -168,6 +191,8 @@ def integ():
                     else:
                         lbound = float(lbound)
                     rbound = input("Enter the upper bound: ")
+                    if (rbound.isnumeric() == False) and ("pi" not in rbound) and ("e" not in rbound) and ("-" not in rbound) and ("." not in rbound):
+                        return "\nTypeError: Upper bound is a not a number."
                     if ("pi" in rbound):
                         rbound = rbound.replace("pi", str(sp.core.numbers.pi))
                         rbound = eval(rbound)
@@ -178,49 +203,51 @@ def integ():
                         rbound = float(rbound)
                     else:
                         rbound = float(rbound)
-                    if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)):
-                        return("\nDiverging integral. Cannot solve.")
                     x = sp.Symbol("x")
-                    if str(integrate(f, (x, lbound, rbound))) == "nan":
-                        return "\nIntegral does not converge. Cannot Solve."
+                    if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)) or (str(integrate(f, (x, lbound, rbound))) == "nan") or ("I" in str(integrate(f, (x, lbound, rbound)))):
+                        return "\nMathError: Cannot compute integral because integral does not converge."
                     else:
                         print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is", integrate(f, (x, lbound, rbound)).evalf())
                         print("\nShow graph of area? (y/n)")
                         show = input("(Exit the graph window when you are finished to continue) ")
                         if show == "y":
-                            print("\nLoading graph. Might take some time on first startup ...")
-                            x = np.linspace((lbound - 8), (rbound + 8), 200000)
-                            if ("ln" in f or "log" in f):
-                                x = np.linspace(int(math.floor(lbound)) + 1, int(math.ceil(rbound)) + 8, 200000)
-                            y = [g(a) for a in x]
-                            fig, ax = plt.subplots()
-                            title = "Shaded area beneath function"
-                            plt.title(title)
-                            plt.xlabel("x", weight = "bold")
-                            plt.ylabel("y", rotation = 0, weight = "bold")
-                            plt.plot(x,y, color = "red")
-                            if float(g(lbound)) < 0:
-                                plt.axis([lbound - 5, rbound + 5, float(g(round(lbound))) - 2, float(g(round(rbound))) + 2])
-                            else:
-                                plt.axis([lbound - 5, rbound + 5, -2, float(g(round(rbound))) + 2])
-                            plt.grid()
-                            ix = np.linspace(lbound, rbound)
-                            iy = [g(i) for i in ix]
-                            verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
-                            poly = Polygon(verts, facecolor = "blue")
-                            ax.add_patch(poly)
-                            plt.show()
-                            return "\nExited graph."
-                        elif show == "n":
+                            try:
+                                print("\nLoading graph. Might take some time on first startup ...")
+                                x = np.linspace((lbound - 8), (rbound + 8), 200000)
+                                if ("ln" in f or "log" in f):
+                                    x = np.linspace(int(math.floor(lbound)) + 1, int(math.ceil(rbound)) + 8, 200000)
+                                y = [g(a) for a in x]
+                                fig, ax = plt.subplots()
+                                title = "Shaded area beneath function"
+                                plt.title(title)
+                                plt.xlabel("x", weight = "bold")
+                                plt.ylabel("y", rotation = 0, weight = "bold")
+                                plt.plot(x,y, color = "red")
+                                # if (float(g(lbound)) != 0) and (float(g(rbound)) != 0):
+                                    # plt.axis([lbound - 5, rbound + 5, float(g(round(lbound)))-(float(g(round(lbound)))+float(g(round(rbound))))/2-1, float(g(round(rbound)))+(float(g(round(lbound)))+float(g(round(rbound))))/2+1])
+                                # elif (float(g(lbound)) == 0) or (float(g(rbound)) == 0):
+                                    # plt.axis([lbound - 5, rbound + 5, -(rbound-lbound)/2, (rbound+lbound)/2])
+                                plt.axis([-7.5, 7.5, -7.5, 7.5])
+                                plt.grid()
+                                ix = np.linspace(lbound, rbound)
+                                iy = [g(i) for i in ix]
+                                verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
+                                poly = Polygon(verts, facecolor = "blue")
+                                ax.add_patch(poly)
+                                plt.show()
+                                return "\nExited graph."
+                            except:
+                                return "\nGraphError: Could not graph function."
+                        else:
                             return "\nExiting Definite Integral Screen ..."
                 print(d_integrate())
             elif cmd == "exit":
                 print("\nExiting InteCalc ... ... ...")
                 break
             else:
-                print("\nError 002: '", cmd, "' is an invalid command.")
+                print("\nCommandError: '", cmd, "' is an invalid command")
         except:
-            print("\nError 001: An unknown error occured.")
+            return "\nUnknownError: An unknown error occured."
 
 
 main()
