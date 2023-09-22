@@ -7,12 +7,9 @@ import math
 import matplotlib.pyplot as plt
 import pendulum
 from matplotlib.patches import Polygon
-import warnings
 
 
 # This program requires the Sympy, SciPy, NumPy, Pendulum, and MatPlotLib modules!
-
-warnings.filterwarnings("ignore")
 
 def main():
     print("\nsudoer-Huatao Proudly Presents ... ... ...\n")
@@ -91,11 +88,13 @@ def deriv():
                     if fnum < 0:
                         return "\nOrderError: Order of derivative calculation is smaller than 0."
                     df = diff(f, x, fnum)
-                    print("\nDerivative of",f,"with order",fnum,"is", df)
+                    print("\nDerivative of",f,"with order",fnum,"is:\n")
+                    pprint(df)
                     if str(sp.simplify(df, evaluate = False)) != str(df):
                         dsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
                         if dsimp == "y":
-                            print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
+                            print("\nSimplified:", df, "into:\n")
+                            pprint(sp.simplify(df, evaluate = False))
                 elif opt == "i":
                     circ = input("\nEnter an equation containing x and y: ")
                     if ("^" in circ):
@@ -105,11 +104,13 @@ def deriv():
                     if fnum < 0:
                         return "\nOrderError: Order of derivative calculation is smaller than 0."
                     df = idiff(eval(circ), y, x, fnum)
-                    print("\nDerivative of order",fnum,"is", df)
+                    print("\nDerivative of order",fnum,"is:\n")
+                    pprint(df)
                     if str(sp.simplify(df, evaluate = False)) != str(df):
                         dsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
                         if dsimp == "y":
-                            print("\nSimplified:", df, "-->", sp.simplify(df, evaluate = False))
+                            print("\nSimplified:", df, "into:\n")
+                            pprint(sp.simplify(df, evaluate = False))
                 else:
                     print("\nCommandError: '", opt, "' is an invalid command")
             elif cmd == "exit":
@@ -163,11 +164,13 @@ def integ():
                 if ("Integral" in str(F.doit())):
                     print("\nCannot compute integral.")
                 else:
-                    print("\nAntiderivative is:", F.doit())
+                    print("\nAntiderivative is:\n")
+                    pprint(F.doit())
                     if str(sp.simplify(F.doit(), evaluate = False)) != str(F.doit()):
                         isimp = input("\nSimplification of answer found. Simplify? (y/n) ")
                         if isimp == "y":
-                            print("\nSimplified:", F.doit(), "-->", sp.simplify(F.doit(), evaluate = False))
+                            print("\nSimplified:", F.doit(), "into:\n")
+                            pprint(sp.simplify(F.doit(), evaluate = False))
             elif cmd == "dstart":
                 print("\n(Current Screen: Definite Integral Screen)\n")
                 def d_integrate():
@@ -207,7 +210,7 @@ def integ():
                     if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)) or (str(integrate(f, (x, lbound, rbound))) == "nan") or ("I" in str(integrate(f, (x, lbound, rbound)))):
                         return "\nMathError: Cannot compute integral because integral does not converge."
                     else:
-                        print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is", integrate(f, (x, lbound, rbound)).evalf())
+                        print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is:", integrate(f, (x, lbound, rbound)).evalf())
                         print("\nShow graph of area? (y/n)")
                         show = input("(Exit the graph window when you are finished to continue) ")
                         if show == "y":
