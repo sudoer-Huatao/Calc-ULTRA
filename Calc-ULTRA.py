@@ -65,7 +65,8 @@ def deriv():
     print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
     print(" - Other Functions such as the Factorial function factorial(x), the Error Function erf(x) and more!")
     print("(Full list available on https://docs.python.org/3/library/math.html)\n")
-    print("\nCommands:\n", "\n - Type 'start' in the main screen to start derivative computation!")
+    print("\nCommands:\n", "\n - Type 'dstart' in the main screen to start derivative computation!")
+    print(" - Type 'pstart' in the main screen to start partial derivative calculation;")
     print(" - Type 'help' in the main screen for a list of operations in Python;")
     print(" - Type 'exit' to quit DerivaCalc")
     print("\n(This version only supports single variable calculus)")
@@ -76,7 +77,7 @@ def deriv():
             if cmd == "help":
                 print("\nBasic operations: \n", "+: add \n", "-: minus \n", "*: multiply \n", "/: divide \n", "**: exponent")
                 print(" %: return the remainder of a division \n", "//: return the rounded-down quotient of a division")
-            elif cmd == "start":
+            elif cmd == "dstart":
                 print("\n(Current Screen: Derivative Screen)\n")
                 opt = input("Choose option: normal derivative computation ('n') or implicit derivative computation ('i'): ")
                 if opt == "n":
@@ -113,6 +114,26 @@ def deriv():
                             pprint(sp.simplify(df, evaluate = False))
                 else:
                     print("\nCommandError: '", opt, "' is an invalid command")
+            elif cmd == "pstart":
+                f = input("\nEnter a function containing x and y or x and y and z:")
+                if ("z" in f):
+                    x,y,z = symbols('x,y,z')
+                else:
+                    x,y = symbols('x,y')
+                if ("^" in f):
+                    f = f.replace("^", "**")
+                res = input("Enter variable to differentiate in respect to: ")
+                fnum = int(input("Enter the order of partial derivative calculation: "))
+                if fnum < 0:
+                    return "\nOrderError: Order of derivative calculation is smaller than 0."
+                df = diff(f, res, fnum)
+                print("\nPartial derivative in respect to",res,"of order",fnum,"is:\n")
+                pprint(df)
+                if str(sp.simplify(df, evaluate = False)) != str(df):
+                    dsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
+                    if dsimp == "y":
+                        print("\nSimplified:", df, "into:\n")
+                        pprint(sp.simplify(df, evaluate = False))
             elif cmd == "exit":
                 print("\nExiting DerivaCalc ... ... ...")
                 break
