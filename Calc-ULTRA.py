@@ -1,6 +1,5 @@
 from sympy import *
 import sympy as sp
-from scipy.integrate import *
 from math import floor, ceil
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +7,7 @@ import pendulum
 from matplotlib.patches import Polygon
 
 
-# This program requires the Sympy, SciPy, NumPy, Pendulum, and MatPlotLib modules!
+# This program requires the Sympy, NumPy, Pendulum, and MatPlotLib modules!
 
 def main():
     print("\nsudoer-Huatao Proudly Presents ... ... ...\n")
@@ -386,30 +385,32 @@ def take_lim():
                 num = input("Enter the point of evaluation: ")
                 if (num.isnumeric() == False) and ("pi" not in num) and ("e" not in num) and ("-" not in num) and ("." not in num) and ("oo" not in num) and ("sqrt" not in num):
                     print("\nTypeError: point of evaluation is a not a number.")
-                if ("pi" in num):
-                    num = num.replace("pi", str(sp.core.numbers.pi))
-                if ("e" in num):
-                    num = num.replace("e", str(E))
-                num = float(eval(num))
-                direction = input("Enter direction to compute the limit ('left' or 'right'): ")
-                if direction == "left":
-                    direction_sign = "-"
-                elif direction == "right":
-                    direction_sign = "+"
                 else:
-                    print("\n TypeError: Direction is not right or left.")
-                x = symbols("x")
-                l = limit(f, x, num, dir = direction_sign)
-                if ("Limit" in str(l)):
-                    print("\nCannot compute limit.")
-                else:
-                    print("\nLimit of",f,"as x approaches",num,"from the", direction, "is:\n")
-                    pprint(l)
-                    if str(sp.simplify(l, evaluate = False)) != str(l):
-                        lsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
-                        if lsimp == "y":
-                            print("\nSimplified:", l, "into:\n")
-                            pprint(sp.simplify(l, evaluate = False))
+                    if ("pi" in num):
+                        num = num.replace("pi", str(sp.core.numbers.pi))
+                    if ("e" in num):
+                        num = num.replace("e", str(E))
+                    num = float(eval(num))
+                    direction = input("Enter direction to compute the limit ('left' or 'right'): ")
+                    if (direction == "left") or (direction == "right"):
+                        if direction == "left":
+                            direction_sign = "-"
+                        elif direction == "right":
+                            direction_sign = "+"
+                        x = symbols("x")
+                        l = limit(f, x, num, dir = direction_sign)
+                        if ("Limit" in str(l)):
+                            print("\nCannot compute limit.")
+                        else:
+                            print("\nLimit of",f,"as x approaches",num,"from the", direction, "is:\n")
+                            pprint(l)
+                            if str(sp.simplify(l, evaluate = False)) != str(l):
+                                lsimp = input("\nSimplification of answer found. Simplify? (y/n) ")
+                                if lsimp == "y":
+                                    print("\nSimplified:", l, "into:\n")
+                                    pprint(sp.simplify(l, evaluate = False))
+                    else:
+                        print("\nTypeError: Direction is not right or left.")
             elif cmd == "exit":
                 print("\nExiting LimCalc ... ... ...")
                 break
