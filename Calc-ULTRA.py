@@ -3,11 +3,11 @@ import sympy as sp
 from math import floor, ceil
 import numpy as np
 import matplotlib.pyplot as plt
-import pendulum
+import datetime
 from matplotlib.patches import Polygon
 
 
-# This program requires the Sympy, NumPy, Pendulum, and MatPlotLib modules!
+# This program requires the Sympy, NumPy, and MatPlotLib modules!
 
 def main():
     print("\nsudoer-Huatao Proudly Presents ... ... ...\n")
@@ -22,9 +22,8 @@ def main():
     print("              | The ULTIMATE Derivative - Integral Calculator! |")
     print("               ------------------------------------------------")
     while True:
-        now = pendulum.now()
-        dt = now.format("Y-MM-DD HH:mm:ss")
-        print("\n( Time now is:", dt, " )")
+        now = datetime.datetime.now()
+        print("\n(Time now is:" + now.strftime("%c") + ")")
         print("\nCommands:\n\n - Type '1' to access DerivaCalc, the Derivative Calculator!")
         print(" - Type '2' to access InteCalc, the Integral Calculator!")
         print(" - Type '3' to access LimCalc, the Limit Calculator!")
