@@ -6,16 +6,16 @@ This is a multi-functional, user-friendly Calculus Calculator!
 - Supports derivatives, antiderivatives, and definite integrals - with a graph!
 - (Please FULL SCREEN your console/terminal for better experience!)
 
-<img width="1020" alt="截屏2023-09-10 15 42 38" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Derivative-Integral-Calculator/assets/135504586/5d947fc2-4a56-42fd-ae28-51f8f4482553">
+<img width="1641" alt="截屏2023-10-26 15 49 25" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/163fe4df-2945-4b18-8f67-286871b9bacb">
 
 # Requirements
 
 This program requires the Sympy, SciPy, NumPy, and MatPlotLib modules.
 
+<img width="1641" alt="截屏2023-10-26 15 51 54" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/9b1efdb8-554d-4412-8834-4d2dec49f750">
+
 # Warning
 Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't.
-
-<img width="1627" alt="截屏2023-09-10 15 51 40" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Derivative-Integral-Calculator/assets/135504586/f45aa5df-1ff7-4503-ad72-1847834706a6">
 
 # How to run
 
