@@ -1,0 +1,34 @@
+
+
+   ---------------------------------------------------------------------------
+
+  +---   +----  +---+  --+--  \       /   ^      +----      ^      |      +----
+  |   |  |      |   |    |     \     /   / \     |         / \     |      |
+  |   |  |---   |---+    |      \   /   / - \    |        / - \    |      |
+  |   |  |      |  \     |       \ /   /     \   |       /     \   |      |
+  +---   +----  |   \  --+--      v   /       \  +----  /       \  +----  +----
+
+   ---------------------------------------------------------------------------
+
+                            The Derivative Calculator
+
+
+DerivaCalc supports:
+ - Special numbers including Pi and e;
+ - Basic Trigonometric Functions;
+ - Exponents (for exponent with base e, input as 'exp(x)', NOT e**x);
+ - The Natural Logarithm (input as log(x));
+ - Inverse Trigonometric Functions (input as 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));
+ - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);
+ - Other Functions such as the Factorial function factorial(x), the Error Function erf(x) and more!
+(Full list available on https://docs.python.org/3/library/math.html)
+
+
+Commands:
+ 
+ - Type 'd' in the main screen to calculate derivatives;
+ - Type 'p' in the main screen to calculate partial derivatives;
+ - Type 'help' in the main screen for a list of operations in Python;
+ - Type 'exit' to quit DerivaCalc
+
+(This version only supports single variable calculus)
