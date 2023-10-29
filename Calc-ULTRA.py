@@ -5,6 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime
 from matplotlib.patches import Polygon
+import warnings
+import os
 
 
 # This program requires the Sympy, NumPy, and MatPlotLib modules!
@@ -21,9 +23,10 @@ def main():
     print("\n               ------------------------------------------------")
     print("              | The ULTIMATE Derivative - Integral Calculator! |")
     print("               ------------------------------------------------")
+    warnings.filterwarnings("ignore")
     while True:
         now = datetime.datetime.now()
-        print("\n(Time now is:" + now.strftime("%c") + ")")
+        print("\n(Time now is:", now.strftime("%c") + ")")
         print("\nCommands:\n\n - Type '1' to access DerivaCalc, the Derivative Calculator!")
         print(" - Type '2' to access InteCalc, the Integral Calculator!")
         print(" - Type '3' to access LimCalc, the Limit Calculator!")
@@ -31,16 +34,16 @@ def main():
         print("\n(Current Screen: Main Screen)\n")
         cmd_main = input("Enter Command: ")
         if cmd_main == "1":
-            deriv()
+            derivacalc()
         elif cmd_main == "2":
-            integ()
+            intecalc()
         elif cmd_main == "3":
-            take_lim()
+            limcalc()
         elif cmd_main == "exit":
             print("\nExiting Calc-ULTRA ... ... ...\n")
             break
         else:
-            print("\nCommandError: '", cmd_main, "' is an invalid command")
+            print("\nCommandError: '"+cmd_main+"' is an invalid command")
 
 '''
 Hey, you! Stop looking at my code, copycats! Quit the code now!
@@ -49,27 +52,12 @@ Just kidding. Have fun with the calculator! - h.t.
 '''
 
 
-def deriv():
-    print("\n\n   ---------------------------------------------------------------------------")
-    print("\n  +---   +----  +---+  --+--  \       /   ^      +----      ^      |      +----")
-    print("  |   |  |      |   |    |     \     /   / \     |         / \     |      |")
-    print("  |   |  |---   |---+    |      \   /   / - \    |        / - \    |      |")
-    print("  |   |  |      |  \     |       \ /   /     \   |       /     \   |      |")
-    print("  +---   +----  |   \  --+--      v   /       \  +----  /       \  +----  +----\n")
-    print("   ---------------------------------------------------------------------------\n")
-    print("                            The Derivative Calculator\n")
-    print("\nDerivaCalc supports:\n - Special numbers including Pi and e;")
-    print(" - Basic Trigonometric Functions;\n - Exponents (for exponent with base e, input as 'exp(x)', NOT e**x);")
-    print(" - The Natural Logarithm (input as log(x));")
-    print(" - Inverse Trigonometric Functions (input as 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
-    print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
-    print(" - Other Functions such as the Factorial function factorial(x), the Error Function erf(x) and more!")
-    print("(Full list available on https://docs.python.org/3/library/math.html)\n")
-    print("\nCommands:\n", "\n - Type 'd' in the main screen to calculate derivatives;")
-    print(" - Type 'p' in the main screen to calculate partial derivatives;")
-    print(" - Type 'help' in the main screen for a list of operations in Python;")
-    print(" - Type 'exit' to quit DerivaCalc")
-    print("\n(This version only supports single variable calculus)")
+def derivacalc():
+    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+"/derivacalc_instructs"
+    derivacalc = open(instruct_path, mode="r")
+    for line in derivacalc.readlines():
+        line = line.rstrip()
+        print(line)
     while True:
         try:
             print("\n(Current Screen: DerivaCalc Main Screen)\n")
@@ -147,126 +135,111 @@ def deriv():
                 print("\nExiting DerivaCalc ... ... ...")
                 break
             else:
-                print("\nCommandError: '", cmd, "' is an invalid command.")
+                print("\nCommandError: '"+cmd+"' is an invalid command.")
         except:
             print("\nUnknownError: An unknown error occured.")
 
 
-def integ():
-    print("\n\n   ------------------------------------------------------------")
-    print("\n  --+--  |\    |  ---+---  +----  +----      ^      |      +----")
-    print("    |    | \   |     |     |      |         / \     |      |")
-    print("    |    |  \  |     |     +---   |        / - \    |      |")
-    print("    |    |   \ |     |     |      |       /     \   |      |")
-    print("  --+--  |    \|     |     +----  +----  /       \  +----  +----")
-    print("\n   ------------------------------------------------------------")
-    print("\n                      The Integral Calculator\n")
-    print("\nInteCalc supports:\n - Special numbers including Pi and e;")
-    print(" - Basic Trigonometric Functions;\n", "- Exponents (for exponent with base e, input as 'exp(x)', NOT e**x);")
-    print(" - The Natural Logarithm (input as log(x));")
-    print(" - Inverse Trigonometric Functions (input as 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
-    print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
-    print("(Full list of Python Math functions available on https://docs.python.org/3/library/math.html)\n")
-    print("\nCommands:\n", "\n - Type 'a' in the main screen to calculate antiderivatives (indefinite integrals);")
-    print(" - Type 'd' in the main screen to calculate definite integrals - with a graph!")
-    print(" - Type 'i' in the main screen to calculate improper integrals;")
-    print(" - Type 'help' in the main screen for a list of operations in Python;")
-    print(" - Type 'exit' to quit InteCalc")
-    print("\n(This version only supports single variable calculus)")
-    print("(Absolute value function and factorial function is only supported by definite integral computation!)")
+def intecalc():
+    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+"/intecalc_instructs"
+    intecalc = open(instruct_path, mode="r")
+    for line in intecalc.readlines():
+        line = line.rstrip()
+        print(line)
     while True:
-        try:
-            print("\n(Current Screen: InteCalc Main Screen)\n")
-            cmd = input("Enter Command: ")
-            if cmd == "help":
-                print("\nBasic operations: ", "\n +: add \n", "-: minus \n", "*: multiply \n", "/: divide \n", "**: exponent")
-                print(" %: return the remainder of a division \n", "//: return the rounded-down quotient of a division")
-            elif cmd == "a":
-                print("\n(Current Screen: Antiderivative Screen)\n")
-                f = input("Enter a function: ")
-                if ("pi" in f):
-                    f = f.replace("pi", str(sp.core.numbers.pi))
+        print("\n(Current Screen: InteCalc Main Screen)\n")
+        cmd = input("Enter Command: ")
+        if cmd == "help":
+            print("\nBasic operations: ", "\n +: add \n", "-: minus \n", "*: multiply \n", "/: divide \n", "**: exponent")
+            print(" %: return the remainder of a division \n", "//: return the rounded-down quotient of a division")
+        elif cmd == "a":
+            print("\n(Current Screen: Antiderivative Screen)\n")
+            f = input("Enter a function: ")
+            if ("pi" in f):
+                f = f.replace("pi", str(sp.core.numbers.pi))
+            if ("^" in f):
+                f = f.replace("^", "**")
+            else:
+                str(f)
+            x = Symbol("x")
+            F = Integral(f, x)
+            if ("Integral" in str(F.doit())):
+                print("\nCannot compute integral.")
+            else:
+                print("\nAntiderivative is:\n")
+                pprint(F.doit())
+                if str(sp.simplify(F.doit(), evaluate = False)) != str(F.doit()):
+                    isimp = input("\nThe above answer can be simplified/rewrote. Simplify/rewrite? (y/n) ")
+                    if isimp == "y":
+                        print("\nSimplified/rewrote:", F.doit(), "into:\n")
+                        pprint(sp.simplify(F.doit(), evaluate = False))
+                print("\nDon't forget to add a constant!")
+        elif cmd == "d":
+            print("\n(Current Screen: Definite Integral Screen)\n")
+            def d_integrate():
+                def g(x):
+                    final = eval(f)
+                    return final
+                f = input("Enter the function you want to integrate: ")
                 if ("^" in f):
                     f = f.replace("^", "**")
+                lbound = input("\nEnter the lower bound: ")
+                if (lbound.isnumeric() == False) and ("pi" not in lbound) and ("e" not in lbound) and ("-" not in lbound) and ("." not in lbound) and ("sqrt" not in lbound) and ("oo" not in lbound):
+                    return "\nTypeError: Lower bound is a not a number."
+                if ("pi" in lbound):
+                    lbound = lbound.replace("pi", str(sp.core.numbers.pi))
+                if ("e" in lbound):
+                    lbound = lbound.replace("e", str(E))
+                lbound = float(eval(lbound))
+                rbound = input("Enter the upper bound: ")
+                if (rbound.isnumeric() == False) and ("pi" not in rbound) and ("e" not in rbound) and ("-" not in rbound) and ("." not in rbound) and ("sqrt" not in rbound) and ("oo" not in rbound):
+                    return "\nTypeError: Upper bound is a not a number."
+                if ("pi" in rbound):
+                    rbound = rbound.replace("pi", str(sp.core.numbers.pi))
+                if ("e" in rbound):
+                    rbound = rbound.replace("e", str(E))
+                rbound = float(eval(rbound))
+                x = sp.Symbol("x")
+                result = integrate(f, (x, lbound, rbound)).evalf()
+                if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)) or (str(result) == "nan") or ("I" in str(result)):
+                    return "\nMathError: Cannot compute integral because integral does not converge."
                 else:
-                    str(f)
-                x = Symbol("x")
-                F = Integral(f, x)
-                if ("Integral" in str(F.doit())):
-                    print("\nCannot compute integral.")
-                else:
-                    print("\nAntiderivative is:\n")
-                    pprint(F.doit())
-                    if str(sp.simplify(F.doit(), evaluate = False)) != str(F.doit()):
-                        isimp = input("\nSimplification of answer found. Simplify? (y/n) ")
-                        if isimp == "y":
-                            print("\nSimplified:", F.doit(), "into:\n")
-                            pprint(sp.simplify(F.doit(), evaluate = False))
-            elif cmd == "d":
-                print("\n(Current Screen: Definite Integral Screen)\n")
-                def d_integrate():
-                    def g(x):
-                        final = eval(f)
-                        return final
-                    f = input("Enter the function you want to integrate: ")
-                    if ("^" in f):
-                        f = f.replace("^", "**")
-                    lbound = input("\nEnter the lower bound: ")
-                    if (lbound.isnumeric() == False) and ("pi" not in lbound) and ("e" not in lbound) and ("-" not in lbound) and ("." not in lbound) and ("sqrt" not in lbound) and ("oo" not in lbound):
-                        return "\nTypeError: Lower bound is a not a number."
-                    if ("pi" in lbound):
-                        lbound = lbound.replace("pi", str(sp.core.numbers.pi))
-                    if ("e" in lbound):
-                        lbound = lbound.replace("e", str(E))
-                    lbound = float(eval(lbound))
-                    rbound = input("Enter the upper bound: ")
-                    if (rbound.isnumeric() == False) and ("pi" not in rbound) and ("e" not in rbound) and ("-" not in rbound) and ("." not in rbound) and ("sqrt" not in rbound) and ("oo" not in rbound):
-                        return "\nTypeError: Upper bound is a not a number."
-                    if ("pi" in rbound):
-                        rbound = rbound.replace("pi", str(sp.core.numbers.pi))
-                    if ("e" in rbound):
-                        rbound = rbound.replace("e", str(E))
-                    rbound = float(eval(rbound))
-                    x = sp.Symbol("x")
-                    dinteg = integrate(f, (x, lbound, rbound)).evalf()
-                    if (("1/x" in f or f == "x^-1") and (lbound <= 0 or lbound <= lbound + 1)) or (str(dinteg) == "nan") or ("I" in str(dinteg)):
-                        return "\nMathError: Cannot compute integral because integral does not converge."
+                    print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is:", result)
+                    print("\nShow graph of area? (y/n)")
+                    show = input("(Exit the graph window when you are finished to continue) ")
+                    if show == "y":
+                        try:
+                            print("\nLoading graph. Might take some time on first startup ...")
+                            x = np.linspace((-rbound-8), (rbound + 8), 200000)
+                            if ("ln" in f or "log" in f):
+                                x = np.linspace(int(floor(lbound)) + 1, int(ceil(rbound)) + 8, 200000)
+                            y = [g(a) for a in x]
+                            fig, ax = plt.subplots()
+                            title = "Shaded area beneath function"
+                            plt.title(title)
+                            plt.xlabel("x", weight = "bold")
+                            plt.ylabel("y", rotation = 0, weight = "bold")
+                            plt.plot(x,y, color = "red")
+                            # if (float(g(lbound)) != 0) and (float(g(rbound)) != 0):
+                                # plt.axis([lbound - 5, rbound + 5, float(g(round(lbound)))-(float(g(round(lbound)))+float(g(round(rbound))))/2-1, float(g(round(rbound)))+(float(g(round(lbound)))+float(g(round(rbound))))/2+1])
+                            # elif (float(g(lbound)) == 0) or (float(g(rbound)) == 0):
+                                # plt.axis([lbound - 5, rbound + 5, -(rbound-lbound)/2, (rbound+lbound)/2])
+                            plt.axis([-7.5, 7.5, -7.5, 7.5])
+                            plt.grid()
+                            ix = np.linspace(lbound, rbound)
+                            iy = [g(i) for i in ix]
+                            verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
+                            poly = Polygon(verts, facecolor = "blue")
+                            ax.add_patch(poly)
+                            plt.show()
+                            return "\nExited graph."
+                        except:
+                            return "\nGraphError: Could not graph function."
                     else:
-                        print("\nCalculated integral of", f, "from", lbound, "to", rbound, ". Final area is:", dinteg)
-                        print("\nShow graph of area? (y/n)")
-                        show = input("(Exit the graph window when you are finished to continue) ")
-                        if show == "y":
-                            try:
-                                print("\nLoading graph. Might take some time on first startup ...")
-                                x = np.linspace((-rbound-8), (rbound + 8), 200000)
-                                if ("ln" in f or "log" in f):
-                                    x = np.linspace(int(floor(lbound)) + 1, int(ceil(rbound)) + 8, 200000)
-                                y = [g(a) for a in x]
-                                fig, ax = plt.subplots()
-                                title = "Shaded area beneath function"
-                                plt.title(title)
-                                plt.xlabel("x", weight = "bold")
-                                plt.ylabel("y", rotation = 0, weight = "bold")
-                                plt.plot(x,y, color = "red")
-                                # if (float(g(lbound)) != 0) and (float(g(rbound)) != 0):
-                                    # plt.axis([lbound - 5, rbound + 5, float(g(round(lbound)))-(float(g(round(lbound)))+float(g(round(rbound))))/2-1, float(g(round(rbound)))+(float(g(round(lbound)))+float(g(round(rbound))))/2+1])
-                                # elif (float(g(lbound)) == 0) or (float(g(rbound)) == 0):
-                                    # plt.axis([lbound - 5, rbound + 5, -(rbound-lbound)/2, (rbound+lbound)/2])
-                                plt.axis([-7.5, 7.5, -7.5, 7.5])
-                                plt.grid()
-                                ix = np.linspace(lbound, rbound)
-                                iy = [g(i) for i in ix]
-                                verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
-                                poly = Polygon(verts, facecolor = "blue")
-                                ax.add_patch(poly)
-                                plt.show()
-                                return "\nExited graph."
-                            except:
-                                return "\nGraphError: Could not graph function."
-                        else:
-                            return "\nExiting Definite Integral Screen ..."
-                print(d_integrate())
-            elif cmd == "i":
+                        return "\nExiting Definite Integral Screen ..."
+            print(d_integrate())
+        elif cmd == "i":
+            def i_integrate():
                 print("\n(Current Screen: Improper Integral Screen)\n")
                 f = input("Enter a function: ")
                 if ("pi" in f):
@@ -277,7 +250,8 @@ def integ():
                     str(f)
                 lbound = input("\nEnter the lower bound: ")
                 if (lbound.isnumeric() == False) and ("pi" not in lbound) and ("e" not in lbound) and ("-" not in lbound) and ("." not in lbound) and ("sqrt" not in lbound) and ("oo" not in lbound):
-                    return "\nTypeError: Lower bound is a not a number."
+                    print("\nTypeError: Lower bound is a not a number.")
+                    i_integrate()
                 if ("pi" in lbound):
                     lbound = lbound.replace("pi", str(sp.core.numbers.pi))
                 if ("e" in lbound):
@@ -288,7 +262,8 @@ def integ():
                     lbound = float(eval(lbound))
                 rbound = input("Enter the upper bound: ")
                 if (rbound.isnumeric() == False) and ("pi" not in rbound) and ("e" not in rbound) and ("-" not in rbound) and ("." not in rbound) and ("sqrt" not in rbound) and ("oo" not in rbound):
-                    return "\nTypeError: Upper bound is a not a number."
+                    print("\nTypeError: Upper bound is a not a number.")
+                    i_integrate()
                 if ("pi" in rbound):
                     rbound = rbound.replace("pi", str(sp.core.numbers.pi))
                 if ("e" in rbound):
@@ -308,34 +283,20 @@ def integ():
                             print("\nSimplified:", improper_area, "into:\n")
                             pprint(sp.simplify(improper_area, evaluate = False))
                 except ValueError:
-                    print("\nValueError: singularity while computing improper integral.")
-            elif cmd == "exit":
-                print("\nExiting InteCalc ... ... ...")
-                break
-            else:
-                print("\nCommandError: '", cmd, "' is an invalid command")
-        except:
-            print("\nUnknownError: An unknown error occured.")
+                    print("\nValueError: Singularity while computing improper integral.")
+            i_integrate()
+        elif cmd == "exit":
+            print("\nExiting InteCalc ... ... ...")
+            break
+        else:
+            print("\nCommandError: '"+cmd+"' is an invalid command")
 
-def take_lim():
-    print("\n\n   -----------------------------------------------------")
-    print("\n  |      --+--  ^       ^  +----      ^      |      +----")
-    print("  |        |    |\     /|  |         / \     |      |")
-    print("  |        |    | \   / |  |        / - \    |      |")
-    print("  |        |    |  \ /  |  |       /     \   |      |")
-    print("  +----  --+--  |   v   |  +----  /       \  +----  +----")
-    print("\n   -----------------------------------------------------")
-    print("\n                   The Limit Calculator\n")
-    print("\nLimCalc supports:\n - Special numbers including Pi and e;")
-    print(" - Basic Trigonometric Functions;\n", "- Exponents (for exponent with base e, input as 'exp(x)', NOT e**x);")
-    print(" - The Natural Logarithm (input as log(x));")
-    print(" - Inverse Trigonometric Functions (input as 'a' followed by a trigonometric function, e.g. asin(x) = arcsin(x));")
-    print(" - Hyperbolic Functions and Inverse Hyperbolic Functions (same input format as inverse trigonometric functions);")
-    print("(Full list of Python Math functions available on https://docs.python.org/3/library/math.html)\n")
-    print("\nCommands:\n", "\n - Type 'n' in the main screen to calculate normal limits;")
-    print(" - Type 'o' in the main screen to calculate one-sided limits;")
-    print(" - Type 'help' in the main screen for a list of operations in Python")
-    print(" - Type 'exit' to quit LimCalc")
+def limcalc():
+    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+"/limcalc_instructs"
+    limcalc = open(instruct_path, mode="r")
+    for line in limcalc.readlines():
+        line = line.rstrip()
+        print(line)
     while True:
         try:
             print("\n(Current Screen: LimCalc Main Screen)\n")
