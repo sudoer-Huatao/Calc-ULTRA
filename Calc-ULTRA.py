@@ -12,7 +12,7 @@ import os
 # This program requires the Sympy, NumPy, and MatPlotLib modules!
 
 def main():
-    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/main_screen.txt'
+    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/texts/main_screen.txt'
     main = open(instruct_path, mode='r')
     for line in main.readlines():
         line = line.rstrip()
@@ -43,7 +43,7 @@ Just kidding. Have fun with the calculator! - h.t.
 
 
 def derivacalc():
-    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/derivacalc_instructs.txt'
+    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/texts/derivacalc_instructs.txt'
     derivacalc = open(instruct_path, mode='r')
     for line in derivacalc.readlines():
         line = line.rstrip()
@@ -131,7 +131,7 @@ def derivacalc():
 
 
 def intecalc():
-    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/intecalc_instructs.txt'
+    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/texts/intecalc_instructs.txt'
     intecalc = open(instruct_path, mode='r')
     for line in intecalc.readlines():
         line = line.rstrip()
@@ -282,7 +282,7 @@ def intecalc():
             print('\nCommandError: ''+cmd+'' is an invalid command')
 
 def limcalc():
-    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/limcalc_instructs.txt'
+    instruct_path = str(os.path.dirname(os.path.abspath(__file__)))+'/texts/limcalc_instructs.txt'
     limcalc = open(instruct_path, mode='r')
     for line in limcalc.readlines():
         line = line.rstrip()
