@@ -1,5 +1,7 @@
 # Calc-ULTRA: Calculus Calculator
 
+[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/) [![Version](https://img.shields.io/badge/Version-5.0.4-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
+
 This is a multi-functional, user-friendly Calculus Calculator!
 
 - No Python background knowledge needed.
@@ -8,7 +10,7 @@ This is a multi-functional, user-friendly Calculus Calculator!
 
 <img width="1641" alt="截屏2023-10-26 15 49 25" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/163fe4df-2945-4b18-8f67-286871b9bacb">
 
-# Requirements
+## Requirements
 
 This program requires the Sympy, SciPy, NumPy, and MatPlotLib modules.
 
@@ -29,7 +31,7 @@ This should resolve the issue.
 
 Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't.
 
-# How to run
+## How to run
 
 To run this project, simply open the Calc-ULTRA.py file and run it.
 
