@@ -15,7 +15,6 @@ Commands:
  
  - Type 'd' in the main screen to calculate derivatives;
  - Type 'p' in the main screen to calculate partial derivatives;
- - Type 'help' in the main screen for a list of operations in Python;
  - Type 'exit' to quit DerivaCalc
 
 (This version only supports single variable calculus)
