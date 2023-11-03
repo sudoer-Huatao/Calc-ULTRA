@@ -52,10 +52,7 @@ def derivacalc():
         try:
             print('\n(Current Screen: DerivaCalc Main Screen)\n')
             cmd = input('Enter Command: ')
-            if cmd == 'help':
-                print('\nBasic operations: \n', '+: add \n', '-: minus \n', '*: multiply \n', '/: divide \n', '**: exponent')
-                print(' %: return the remainder of a division \n', '//: return the rounded-down quotient of a division')
-            elif cmd == 'd':
+            if cmd == 'd':
                 print('\n(Current Screen: Derivative Screen)\n')
                 opt = input('Choose option: normal derivative computation ("n") or implicit derivative computation ("i"): ')
                 if opt == 'n':
@@ -99,7 +96,7 @@ def derivacalc():
                 else:
                     print('\nCommandError:'+'opt'+'is an invalid command')
             elif cmd == 'p':
-                f = input('\nEnter a function containing x and y or x and y and z:')
+                f = input('\nEnter a function containing x and y or x and y and z: ')
                 if ('z' in f):
                     x,y,z = symbols('x,y,z')
                 else:
@@ -125,7 +122,7 @@ def derivacalc():
                 print('\nExiting DerivaCalc ... ... ...')
                 break
             else:
-                print('\nCommandError: ''+cmd+'' is an invalid command.')
+                print('\nCommandError: "'+cmd+'" is an invalid command.')
         except:
             print('\nUnknownError: An unknown error occured.')
 
@@ -139,10 +136,7 @@ def intecalc():
     while True:
         print('\n(Current Screen: InteCalc Main Screen)\n')
         cmd = input('Enter Command: ')
-        if cmd == 'help':
-            print('\nBasic operations: ', '\n +: add \n', '-: minus \n', '*: multiply \n', '/: divide \n', '**: exponent')
-            print(' %: return the remainder of a division \n', '//: return the rounded-down quotient of a division')
-        elif cmd == 'a':
+        if cmd == 'a':
             print('\n(Current Screen: Antiderivative Screen)\n')
             f = input('Enter a function: ')
             if ('pi' in f):
@@ -279,7 +273,7 @@ def intecalc():
             print('\nExiting InteCalc ... ... ...')
             break
         else:
-            print('\nCommandError: ''+cmd+'' is an invalid command')
+            print('\nCommandError: "'+cmd+'" is an invalid command')
 
 def limcalc():
     instruct_path = os.path.dirname(os.path.abspath(__file__))+'/texts/limcalc_instructs.txt'
@@ -291,10 +285,7 @@ def limcalc():
         try:
             print('\n(Current Screen: LimCalc Main Screen)\n')
             cmd = input('Enter Command: ')
-            if cmd == 'help':
-                print('\nBasic operations: ', '\n +: add \n', '-: minus \n', '*: multiply \n', '/: divide \n', '**: exponent')
-                print(' %: return the remainder of a division \n', '//: return the rounded-down quotient of a division')
-            elif cmd == 'n':
+            if cmd == 'n':
                 print('\n(Current screen: Limit Screen)\n')
                 f = input('Enter a function: ')
                 if ('pi' in f):
@@ -365,7 +356,7 @@ def limcalc():
                 print('\nExiting LimCalc ... ... ...')
                 break
             else:
-                print('\nCommandError: '', cmd, '' is an invalid command')
+                print('\nCommandError: "'+cmd+'" is an invalid command')
         except:
             print('\nUnknownError: An unknown error occured.')
 
