@@ -15,5 +15,4 @@ Commands:
  
  - Type 'n' in the main screen to calculate normal limits;
  - Type 'o' in the main screen to calculate one-sided limits;
- - Type 'help' in the main screen for a list of operations in Python
- - Type 'exit' to quit LimCalc
+ - Type 'exit' to quit LimCalc.
