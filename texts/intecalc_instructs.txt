@@ -16,7 +16,6 @@ Commands:
  - Type 'a' in the main screen to calculate antiderivatives (indefinite integrals);
  - Type 'd' in the main screen to calculate definite integrals - with a graph!
  - Type 'i' in the main screen to calculate improper integrals;
- - Type 'help' in the main screen for a list of operations in Python;
  - Type 'exit' to quit InteCalc
 
 (This version only supports single variable calculus)
