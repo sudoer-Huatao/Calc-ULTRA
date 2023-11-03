@@ -1,6 +1,6 @@
 # Calc-ULTRA: Calculus Calculator
 
-[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-5.0.4-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
+[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-5.0.5-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
 
 This is a multi-functional, user-friendly Calculus Calculator!
 
