@@ -1,6 +1,6 @@
 # Calc-ULTRA: Calculus Calculator
 
-[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/) [![Version](https://img.shields.io/badge/Version-5.0.4-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
+[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-5.0.4-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
 
 This is a multi-functional, user-friendly Calculus Calculator!
 
@@ -18,6 +18,8 @@ This program requires the Sympy, SciPy, NumPy, and MatPlotLib modules.
 
 # Warnings!!!
 
+## Error Message:
+
 If your computer returns this error:
 
 `PermissionError: [Errno 1] Operation not permitted: '/Users/YOUR_USERNAME/../Calc-ULTRA_Calculus-Calculator-main/texts/main_screen.txt'`
@@ -26,21 +28,28 @@ Please ensure that your current directory is the "Calc-ULTRA_Calculus-Calculator
 
 `sudo python3 Calc-ULTRA.py`
 
-This should resolve the issue.
+This should resolve the issue. 😅
 
+## Function limitations:
 
-Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't.
-
-## How to run
-
-To run this project, simply open the Calc-ULTRA.py file and run it.
+Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't. 😟
 
 # Acknowledgements
 
-A general thank-you to all GitHub users who gave feedback and/or starred this repository,
-and a SPECIAL THANK-YOU to @Haobot for troubleshooting and feedback!
+A general thank-you to all GitHub users who gave feedback and/or starred this repository. ⭐️
+And... a SPECIAL THANK-YOU to @Haobot for troubleshooting and feedback! 👍❤️
 
 This program was made using SymPy and SciPy for calculation and Matplotlib and NumPy for graphing.
+
+# FAQ
+
+## Which Python version should I use to run this program?
+
+A: Python 3 is best, but Python 2.x should work as well. 👍
+
+## How do you run this program?
+
+A: To run this project, simply open the Calc-ULTRA.py file and run it. Make sure that you downloaded the required modules! 💾
 
 # License
 
