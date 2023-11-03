@@ -12,7 +12,7 @@ This is a multi-functional, user-friendly Calculus Calculator!
 
 ## Requirements
 
-This program requires the Sympy, SciPy, NumPy, and MatPlotLib modules.
+This program requires `sympy`,  `numpy`, `matplotlib`, `datetime`, `math`, and `os` modules. `datetime`, `math`, and `os` are built-in to most Python editors. The rest can be installed with the command `pip install MODULE_NAME`.
 
 <img width="1641" alt="截屏2023-10-26 15 51 54" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/9b1efdb8-554d-4412-8834-4d2dec49f750">
 
