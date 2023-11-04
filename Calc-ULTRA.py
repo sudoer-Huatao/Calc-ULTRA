@@ -36,9 +36,7 @@ def main():
             print('\nCommandError: "'+cmd_main+'" is an invalid command')
 
 '''
-Hey, you! Stop looking at my code, copycats! Quit the code now!
-
-Just kidding. Have fun with the calculator! - h.t.
+If you find this message, type "hi" in the general discussions - sudoer-Huatao
 '''
 
 
@@ -54,47 +52,22 @@ def derivacalc():
             cmd = input('Enter Command: ')
             if cmd == 'd':
                 print('\n(Current Screen: Derivative Screen)\n')
-                opt = input('Choose option: normal derivative computation ("n") or implicit derivative computation ("i"): ')
-                if opt == 'n':
-                    f = input('\nEnter a function: ')
-                    if ('^' in f):
-                        f = f.replace('^', '**')
-                    fnum = input('Enter the order of derivative calculation: ')
-                    if fnum.isnumeric() == False:
-                        print('\nTypeError: Order of derivative calculation is not a number.')
-                    elif int(fnum) < 0:
-                        print('\nOrderError: Order of derivative calculation is smaller than 0.')
-                    else:
-                        x = symbols('x')
-                        df = diff(f, x, fnum)
-                        print('\nDerivative of',f,'with order',fnum,'is:\n')
-                        pprint(df)
-                        if str(sp.simplify(df, evaluate = False)) != str(df):
-                            dsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
-                            if dsimp == 'y':
-                                print('\nSimplified:', df, 'into:\n')
-                                pprint(sp.simplify(df, evaluate = False))
-                elif opt == 'i':
-                    circ = input('\nEnter an equation containing x and y: ')
-                    if ('^' in circ):
-                        circ = circ.replace('^', '**')
-                    fnum = input('Enter the order of derivative calculation: ')
-                    if fnum.isnumeric() == False:
-                        print('\nTypeError: Order of derivative calculation is not a number.')
-                    elif int(fnum) < 0:
-                        print('\nOrderError: Order of derivative calculation is smaller than 0.')
-                    else:
-                        x,y = symbols('x,y')
-                        df = idiff(eval(circ), y, x, fnum)
-                        print('\nDerivative of order',fnum,'is:\n')
-                        pprint(df)
-                        if str(sp.simplify(df, evaluate = False)) != str(df):
-                            dsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
-                            if dsimp == 'y':
-                                print('\nSimplified:', df, 'into:\n')
-                                pprint(sp.simplify(df, evaluate = False))
+                f = input('Enter a function: ')
+                if ('^' in f):
+                    f = f.replace('^', '**')
+                fnum = input('Enter the order of derivative calculation: ')
+                if ('.' in fnum) or (fnum.isnumeric() == False) or (int(fnum) < 0):
+                    print('\nOrderError: Order of derivative calculation is not a valid number.')
                 else:
-                    print('\nCommandError:'+'opt'+'is an invalid command')
+                    x = symbols('x')
+                    df = diff(f, x, fnum)
+                    print('\nDerivative of',f,'with order',fnum,'is:\n')
+                    pprint(df)
+                    if str(sp.simplify(df, evaluate = False)) != str(df):
+                        dsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
+                        if dsimp == 'y':
+                            print('\nSimplified:', df, 'into:\n')
+                            pprint(sp.simplify(df, evaluate = False))
             elif cmd == 'p':
                 f = input('\nEnter a function containing x and y or x and y and z: ')
                 if ('z' in f):
@@ -105,13 +78,28 @@ def derivacalc():
                     f = f.replace('^', '**')
                 res = input('Enter variable to differentiate in respect to: ')
                 fnum = input('Enter the order of partial derivative calculation: ')
-                if fnum.isnumeric() == False:
-                    print('\nTypeError: Order of derivative calculation is not a number.')
-                elif int(fnum) < 0:
-                    print('\nOrderError: Order of derivative calculation is smaller than 0.')
+                if ('.' in fnum) or (fnum.isnumeric() == False) or (int(fnum) < 0):
+                    print('\nOrderError: Order of derivative calculation is not a valid number.')
                 else:
                     df = diff(f, res, fnum)
                     print('\nPartial derivative in respect to',res,'of order',fnum,'is:\n')
+                    pprint(df)
+                    if str(sp.simplify(df, evaluate = False)) != str(df):
+                        dsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
+                        if dsimp == 'y':
+                            print('\nSimplified:', df, 'into:\n')
+                            pprint(sp.simplify(df, evaluate = False))
+            elif cmd == 'i':
+                circ = input('\nEnter an equation containing x and y: ')
+                if ('^' in circ):
+                    circ = circ.replace('^', '**')
+                fnum = input('Enter the order of derivative calculation: ')
+                if ('.' in fnum) or (fnum.isnumeric() == False) or (int(fnum) < 0):
+                    print('\nOrderError: Order of derivative calculation is not a valid number.')
+                else:
+                    x,y = symbols('x,y')
+                    df = idiff(eval(circ), y, x, int(fnum))
+                    print('\nDerivative of order',fnum,'is:\n')
                     pprint(df)
                     if str(sp.simplify(df, evaluate = False)) != str(df):
                         dsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
