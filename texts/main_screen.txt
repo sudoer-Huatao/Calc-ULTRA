@@ -26,4 +26,5 @@ Commands:
  - Type '1' to access DerivaCalc, the Derivative Calculator!
  - Type '2' to access InteCalc, the Integral Calculator!
  - Type '3' to access LimCalc, the Limit Calculator!
+ - Type 'settings' to access settings
  - Type 'exit' to quit Calc-ULTRA
