@@ -1,6 +1,6 @@
 # Calc-ULTRA: Calculus Calculator
 
-[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-5.0.7-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
+[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-5.1.1-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
 
 This is a multi-functional, user-friendly Calculus Calculator!
 
@@ -12,7 +12,7 @@ This is a multi-functional, user-friendly Calculus Calculator!
 
 ## Requirements
 
-This program requires `sympy`,  `numpy`, `matplotlib`, `datetime`, `math`, and `os` modules. `datetime`, `math`, and `os` are built-in to most Python editors. The rest can be installed with the command `pip install MODULE_NAME`.
+This program requires `sympy`,  `numpy`, `matplotlib`, `datetime`, `math`, `logging`, `warnings` and `os` modules. `datetime`, `math`, `logging`, `warnings` and `os` are built-in to most Python editors. The rest can be installed with the command `pip install MODULE_NAME`.
 
 <img width="1641" alt="截屏2023-10-26 15 51 54" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/9b1efdb8-554d-4412-8834-4d2dec49f750">
 
