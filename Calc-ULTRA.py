@@ -12,11 +12,8 @@ import warnings
 
 # This program requires the Sympy, NumPy, and MatPlotLib modules installed!
 
-def main():
 
-    global print_option, graph_option
-    print_option = 'p'
-    graph_option = 'f'
+def main():
 
     instruct_path = os.path.dirname(os.path.abspath(__file__))+'/texts/main_screen.txt'
     main = open(instruct_path, mode='r')
@@ -29,7 +26,7 @@ def main():
     while True:
 
         now = (datetime.datetime.now()).strftime("%Y/%m/%d %H:%M:%S")
-        print('\n(Time now is:', now+')')
+        print(f'\n(Time now is: {now})')
 
         print('\n(Current Screen: Main Screen)\n')
         cmd = input('Enter Command: ')
@@ -520,12 +517,14 @@ def open_settings():
         if cmd == 'print':
             print('\n(Current Screen: Print Settings Screen)\n')
 
+            global print_option
             print_option = input("Set print mode: 'p' (Sympy Pretty Print) or 'n' (Normal Print): ")
             print(f'\nPrinting mode set to: "{print_option}"')
 
         elif cmd == 'graph':
             print('\n(Current Screen: Graph Settings Screen)\n')
 
+            global graph_option
             graph_option = input("Set graph mode: 'f' (Fixed graph view) or 'a' (Adjusted graph view): ")
             print(f'\nGraph mode set to: "{graph_option}"')
 
@@ -539,12 +538,16 @@ def open_settings():
 
 def print_expr(text):
 
-    printing_methods = {  
+    printing_methods = {
         'p': lambda t: pprint(text),
         'n': lambda t: print(text)
     }
 
-    printing_methods[print_option](text)
+    try:
+        printing_methods[print_option](text)
+    
+    except NameError:
+        printing_methods['p'](text)
 
 
 main()
