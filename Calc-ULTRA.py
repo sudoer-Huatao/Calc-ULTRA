@@ -273,15 +273,19 @@ def intecalc():
                             plt.ylabel('y', rotation = 0, weight = 'bold')
                             plt.plot(x,y, color = 'red')
 
-                            if graph_option == 'f':
+                            try:
+                                if graph_option == 'f':
+                                    plt.axis([-7.5, 7.5, -7.5, 7.5])
+
+                                elif graph_option == 'a':
+                                    if (float(g(lbound)) != 0) and (float(g(rbound)) != 0):
+                                        plt.axis([lbound - 5, rbound + 5, float(g(round(lbound)))-(float(g(round(lbound)))+float(g(round(rbound))))/2-1, float(g(round(rbound)))+(float(g(round(lbound)))+float(g(round(rbound))))/2+1])
+                                    elif (float(g(lbound)) == 0) or (float(g(rbound)) == 0):
+                                        plt.axis([lbound - 5, rbound + 5, -(rbound-lbound)/2, (rbound+lbound)/2])
+
+                            except:
                                 plt.axis([-7.5, 7.5, -7.5, 7.5])
-
-                            elif graph_option == 'a':
-                                if (float(g(lbound)) != 0) and (float(g(rbound)) != 0):
-                                    plt.axis([lbound - 5, rbound + 5, float(g(round(lbound)))-(float(g(round(lbound)))+float(g(round(rbound))))/2-1, float(g(round(rbound)))+(float(g(round(lbound)))+float(g(round(rbound))))/2+1])
-                                elif (float(g(lbound)) == 0) or (float(g(rbound)) == 0):
-                                    plt.axis([lbound - 5, rbound + 5, -(rbound-lbound)/2, (rbound+lbound)/2])
-
+                        
                             plt.grid()
 
                             ix = np.linspace(lbound, rbound)
