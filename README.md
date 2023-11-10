@@ -1,20 +1,21 @@
 # Calc-ULTRA: Calculus Calculator
 
-[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-5.1.2-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
+[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-5.1.3-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
 
 This is a multi-functional, user-friendly Calculus Calculator!
 
 - No Python background knowledge needed.
 - Supports derivatives, antiderivatives, and definite integrals - with a graph!
 - (Please FULL SCREEN your console/terminal for better experience!)
+<img width="1710" alt="截屏2023-11-09 20 07 22" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/a415b82e-c4f6-451f-b0eb-fcada5361351">
 
-<img width="1641" alt="截屏2023-10-26 15 49 25" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/163fe4df-2945-4b18-8f67-286871b9bacb">
 
 ## Requirements
 
 This program requires `sympy`,  `numpy`, `matplotlib`, `datetime`, `math`, `logging`, `warnings` and `os` modules. `datetime`, `math`, `logging`, `warnings` and `os` are built-in to most Python editors. The rest can be installed with the command `pip install MODULE_NAME`.
 
-<img width="1641" alt="截屏2023-10-26 15 51 54" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/9b1efdb8-554d-4412-8834-4d2dec49f750">
+<img width="1704" alt="截屏2023-11-09 20 09 30" src="https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator/assets/135504586/3dd0e710-f3f2-4605-a7b7-dc6027edb451">
+
 
 # Warnings!!!
 
@@ -35,6 +36,7 @@ This should resolve the issue. 😅
 Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't. 😟
 
 # Acknowledgements
+
 
 A general thank-you to all GitHub users who gave feedback and/or starred this repository. ⭐️
 And... a SPECIAL THANK-YOU to @Haobot for troubleshooting and feedback! 👍❤️
