@@ -1,5 +1,5 @@
 from sympy import *
-import sympy as sp
+from sympy.core.numbers import pi, E
 from math import floor, ceil
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,507 +12,329 @@ import warnings
 
 # This program requires the Sympy, NumPy, and MatPlotLib modules installed!
 
+def derive(function, order):
+    if '^' in function:
+        function = function.replace('^', '**')
 
-def main():
+    if check_order(order) is True:
+        df = diff(function, x, order)
 
-    instruct_path = os.path.dirname(os.path.abspath(__file__))+'/texts/main_screen.txt'
-    main = open(instruct_path, mode='r')
-    for line in main.readlines():
-        line = line.rstrip()
-        print(line)
+        print(f'\nDerivative of {function} with order {order} is:\n')
+        return print_expr(df)
 
-    warnings.filterwarnings('ignore')
+        if check_simp(df) is True:
+            print('\nSimplify/rewrite:\n')
+            print_expr(simplify(df, evaluate=False))
 
-    while True:
 
-        now = (datetime.datetime.now()).strftime("%Y/%m/%d %H:%M:%S")
-        print(f'\n(Time now is: {now})')
+def partial_derive(function, var, order):
+    if '^' in function:
+        function = function.replace('^', '**')
 
-        print('\n(Current Screen: Main Screen)\n')
-        cmd = input('Enter Command: ')
+    if check_order(order) is True:
+        df = diff(function, var, order)
 
-        if cmd == '1':
-            derivacalc()
+        print(f'\nPartial derivative of {function} in respect to {var} of order {order} is:\n')
+        print_expr(df)
 
-        elif cmd == '2':
-            intecalc()
-        
-        elif cmd == '3':
-            limcalc()
-        
-        elif cmd == 'settings':
-            open_settings()
-        
-        elif cmd == 'exit':
-            print('\nExiting Calc-ULTRA ... ... ...\n')
-            break
-        
-        else:
-            logging.warn(f'Invalid command:"{cmd}"')
+        if check_simp(df) is True:
+            print('\nSimplify/rewrite:\n')
+            print_expr(simplify(df, evaluate=False))
 
-'''
-If you find this message, type "hi" in the general discussions - sudoer-Huatao
-'''
 
+def implicit_derive(circ, order):
+    if '^' in circ:
+        circ = circ.replace('^', '**')
 
-def derivacalc():
+    if check_order(order) is True:
+        df = idiff(eval(circ), y, x, int(order))
 
-    instruct_path = os.path.dirname(os.path.abspath(__file__))+'/texts/derivacalc_instructs.txt'
-    derivacalc = open(instruct_path, mode='r')
-    for line in derivacalc.readlines():
-        line = line.rstrip()
-        print(line)
+        print(f'\nDerivative of {circ} with order {order} is:\n')
+        print_expr(df)
 
-    while True:
+        if str(simplify(df, evaluate=False)) != str(df):
+            print('\nSimplify/rewrite:\n')
+            print_expr(simplify(df, evaluate=False))
 
-        try:
-            print('\n(Current Screen: DerivaCalc Main Screen)\n')
-            cmd = input('Enter Command: ')
 
-            if cmd == 'd':
-                print('\n(Current Screen: Derivative Screen)\n')
-                f = input('Enter a function: ')
+def antiderive(function):
+    if 'pi' in function:
+        function = function.replace('pi', str(pi))
 
-                if ('^' in f):
-                    f = f.replace('^', '**')
+    if '^' in function:
+        function = function.replace('^', '**')
 
-                fnum = input('Enter the order of derivative calculation: ')
+    F = Integral(function, x).doit()
 
-                if ('.' in fnum) or (fnum.isnumeric() == False) or (int(fnum) <= 0):
-                    logging.error('OrderError: Order of derivative calculation is not a valid number.')
+    if 'Integral' in str(F):
+        logging.warn('Cannot compute integral.')
 
-                else:
-                    x = symbols('x')
-                    df = diff(f, x, fnum)
+    else:
+        print('\nAntiderivative is:\n')
+        print_expr(F)
 
-                    print('\nDerivative of',f,'with order',fnum,'is:\n')
-                    print_expr(df)
+        if check_simp(F) is True:
+            print('\nSimplify/rewrite:\n')
+            print_expr(simplify(F, evaluate=False))
 
-                    if str(sp.simplify(df, evaluate = False)) != str(df):
-                        dsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
+        print("\nDon't forget to add a constant!")
 
-                        if dsimp == 'y':
-                            print('\nSimplified:', df, 'into:\n')
-                            print_expr(sp.simplify(df, evaluate = False))
 
-            elif cmd == 'p':
-                f = input('\nEnter a function containing x and y or x and y and z: ')
+def definite_integrate(function, low, up):
+    x = Symbol('x')
 
-                if ('z' in f):
-                    x,y,z = symbols('x,y,z')
+    if '^' in function:
+        function = function.replace('^', '**')
 
-                else:
-                    x,y = symbols('x,y')
+    if check_bound(low) is False:
+        return ''
 
-                if ('^' in f):
-                    f = f.replace('^', '**')
+    low = float(eval(replace_bound(low)))
 
-                res = input('Enter variable to differentiate in respect to: ')
-                fnum = input('Enter the order of partial derivative calculation: ')
+    if check_bound(up) is False:
+        return ''
 
-                if ('.' in fnum) or (fnum.isnumeric() == False) or (int(fnum) < 0):
-                    logging.error('OrderError: Order of derivative calculation is not a valid number.')
+    up = float(eval(replace_bound(up)))
 
-                else:
-                    df = diff(f, res, fnum)
+    result = integrate(function, (x, low, up)).evalf()
 
-                    print('\nPartial derivative in respect to',res,'of order',fnum,'is:\n')
-                    print_expr(df)
-                    
-                    if str(sp.simplify(df, evaluate = False)) != str(df):
-                        show_simp = input('\nSimplification of answer found. Simplify? (y/n) ')
-                        
-                        if show_simp == 'y':
-                            print('\nSimplified:', df, 'into:\n')
-                            print_expr(sp.simplify(df, evaluate = False))
+    if (
+        ('1/x' in function or function == 'x^-1')
+        and (low <= 0 or low <= low + 1)
+        or (str(result) == 'nan')
+        or ('I' in str(result))
+    ):
+        logging.warn('Cannot compute integral because integral does not converge.')
 
-            elif cmd == 'i':
+    else:
+        print(f'\nCalculated integral of {function} from {low} to {up}. Final area is:\n')
+        print_expr(result)
+        print('\nShow graph of area? (y/n)')
+        show = input('(Exit the graph window when you are finished to continue) ')
 
-                circ = input('\nEnter an equation containing x and y: ')
-
-                if ('^' in circ):
-                    circ = circ.replace('^', '**')
-
-                fnum = input('Enter the order of derivative calculation: ')
-
-                if ('.' in fnum) or (fnum.isnumeric() == False) or (int(fnum) < 0):
-                    logging.error('OrderError: Order of derivative calculation is not a valid number.')
-                
-                else:
-                    x,y = symbols('x,y')
-                    df = idiff(eval(circ), y, x, int(fnum))
-
-                    print('\nDerivative of order',fnum,'is:\n')
-                    print_expr(df)
-
-                    if str(sp.simplify(df, evaluate = False)) != str(df):
-                        show_simp = input('\nSimplification of answer found. Simplify? (y/n) ')
-
-                        if show_simp == 'y':
-                            print('\nSimplified:', df, 'into:\n')
-                            print_expr(sp.simplify(df, evaluate = False))
-
-            elif cmd == 'exit':
-                print('\nExiting DerivaCalc ... ... ...')
-                break
-
-            else:
-                logging.warn(f'Invalid command:"{cmd}"')
-
-        except:
-            logging.error('UnknownError: An unknown error occured.')
-
-
-def intecalc():
-
-    instruct_path = os.path.dirname(os.path.abspath(__file__))+'/texts/intecalc_instructs.txt'
-    intecalc = open(instruct_path, mode='r')
-    for line in intecalc.readlines():
-        line = line.rstrip()
-        print(line)
-
-    while True:
-
-        print('\n(Current Screen: InteCalc Main Screen)\n')
-        cmd = input('Enter Command: ')
-
-        if cmd == 'a':
-            print('\n(Current Screen: Antiderivative Screen)\n')
-            f = input('Enter a function: ')
-
-            if ('pi' in f):
-                f = f.replace('pi', str(sp.core.numbers.pi))
-
-            if ('^' in f):
-                f = f.replace('^', '**')
-
-            else:
-                str(f)
-
-            x = Symbol('x')
-            F = Integral(f, x)
-
-            if ('Integral' in str(F.doit())):
-                logging.warn('Cannot compute integral.')
-
-            else:
-                print('\nAntiderivative is:\n')
-                print_expr(F.doit())
-
-                if str(sp.simplify(F.doit(), evaluate = False)) != str(F.doit()):
-                    show_simp = input('\nThe above answer can be simplified/rewrote. Simplify/rewrite? (y/n) ')
-                    
-                    if show_simp == 'y':
-                        print('\nSimplified/rewrote:', F.doit(), 'into:\n')
-                        print_expr(sp.simplify(F.doit(), evaluate = False))
-
-                print("\nDon't forget to add a constant!")
-
-        elif cmd == 'd':
-            print('\n(Current Screen: Definite Integral Screen)\n')
-
-            def d_integrate():
-
-                def g(x):
-                    final = eval(f)
-                    return final
-
-                f = input('Enter the function you want to integrate: ')
-
-                if ('^' in f):
-                    f = f.replace('^', '**')
-
-                lbound = input('\nEnter the lower bound: ')
-
-                if (lbound.isnumeric() == False) and ('pi' not in lbound) and ('e' not in lbound) and ('-' not in lbound) and ('.' not in lbound) and ('sqrt' not in lbound) and ('oo' not in lbound):
-                    logging.error('TypeError: Lower bound is a not a number.')
-
-                if ('pi' in lbound):
-                    lbound = lbound.replace('pi', str(sp.core.numbers.pi))
-                if ('e' in lbound):
-                    lbound = lbound.replace('e', str(E))
-
-                lbound = float(eval(lbound))
-
-                rbound = input('Enter the upper bound: ')
-
-                if (rbound.isnumeric() == False) and ('pi' not in rbound) and ('e' not in rbound) and ('-' not in rbound) and ('.' not in rbound) and ('sqrt' not in rbound) and ('oo' not in rbound):
-                    logging.error('TypeError: Upper bound is a not a number.')
-
-                if ('pi' in rbound):
-                    rbound = rbound.replace('pi', str(sp.core.numbers.pi))
-                if ('e' in rbound):
-                    rbound = rbound.replace('e', str(E))
-
-                rbound = float(eval(rbound))
-
-                x = Symbol('x')
-                result = integrate(f, (x, lbound, rbound)).evalf()
-
-                if (('1/x' in f or f == 'x^-1') and (lbound <= 0 or lbound <= lbound + 1)) or (str(result) == 'nan') or ('I' in str(result)):
-                    logging.warn('Cannot compute integral because integral does not converge.')
-
-                else:
-                    print('\nCalculated integral of', f, 'from', lbound, 'to', rbound, '. Final area is:', result)
-                    print('\nShow graph of area? (y/n)')
-                    show = input('(Exit the graph window when you are finished to continue) ')
-
-                    if show == 'y':
-                        try:
-                            print('\nLoading graph. Might take some time on first startup ...')
-
-                            x = np.linspace((-rbound-8), (rbound + 8), 200000)
-                            if ('ln' in f or 'log' in f):
-                                x = np.linspace(int(floor(lbound)) + 1, int(ceil(rbound)) + 8, 200000)
-                            y = [g(a) for a in x]
-                            fig, ax = plt.subplots()
-
-                            title = 'Shaded area beneath function'
-                            plt.title(title)
-                            plt.xlabel('x', weight = 'bold')
-                            plt.ylabel('y', rotation = 0, weight = 'bold')
-                            plt.plot(x,y, color = 'red')
-
-                            try:
-                                if graph_option == 'f':
-                                    plt.axis([-7.5, 7.5, -7.5, 7.5])
-
-                                elif graph_option == 'a':
-                                    if (float(g(lbound)) != 0) and (float(g(rbound)) != 0):
-                                        plt.axis([lbound - 5, rbound + 5, float(g(round(lbound)))-(float(g(round(lbound)))+float(g(round(rbound))))/2-1, float(g(round(rbound)))+(float(g(round(lbound)))+float(g(round(rbound))))/2+1])
-                                    elif (float(g(lbound)) == 0) or (float(g(rbound)) == 0):
-                                        plt.axis([lbound - 5, rbound + 5, -(rbound-lbound)/2, (rbound+lbound)/2])
-
-                            except:
-                                plt.axis([-7.5, 7.5, -7.5, 7.5])
-                        
-                            plt.grid()
-
-                            ix = np.linspace(lbound, rbound)
-                            iy = [g(i) for i in ix]
-                            verts = [(lbound, 0)] + list(zip(ix, iy)) + [(rbound, 0)]
-                            poly = Polygon(verts, facecolor = 'blue')
-                            ax.add_patch(poly)
-
-                            plt.show()
-                            return '\nExited graph.'
-                        
-                        except:
-                            logging.warn('Could not graph function.')
-
-                    else:
-                        return '\nExiting Definite Integral Screen ...'
-                    
-
-            print(d_integrate())
-
-        elif cmd == 'i':
-            
-            def i_integrate():
-
-                print('\n(Current Screen: Improper Integral Screen)\n')
-                f = input('Enter a function: ')
-
-                if ('pi' in f):
-                    f = f.replace('pi', str(sp.core.numbers.pi))
-
-                if ('^' in f):
-                    f = f.replace('^', '**')
-
-                else:
-                    str(f)
-
-                lbound = input('\nEnter the lower bound: ')
-
-                if (lbound.isnumeric() == False) and ('pi' not in lbound) and ('e' not in lbound) and ('-' not in lbound) and ('.' not in lbound) and ('sqrt' not in lbound) and ('oo' not in lbound):
-                    logging.error('TypeError: Lower bound is a not a number.')
-                    i_integrate()
-
-                if ('pi' in lbound):
-                    lbound = lbound.replace('pi', str(sp.core.numbers.pi))
-                if ('e' in lbound):
-                    lbound = lbound.replace('e', str(E))
-                if ('oo' in lbound):
-                    lbound = eval(lbound)
-                else:
-                    lbound = float(eval(lbound))
-
-                rbound = input('Enter the upper bound: ')
-
-                if (rbound.isnumeric() == False) and ('pi' not in rbound) and ('e' not in rbound) and ('-' not in rbound) and ('.' not in rbound) and ('sqrt' not in rbound) and ('oo' not in rbound):
-                    logging.error('\nTypeError: Upper bound is a not a number.')
-                    i_integrate()
-
-                if ('pi' in rbound):
-                    rbound = rbound.replace('pi', str(sp.core.numbers.pi))
-                if ('e' in rbound):
-                    rbound = rbound.replace('e', str(E))
-                if ('oo' in rbound):
-                    rbound = eval(rbound)
-                else:
-                    rbound = float(eval(rbound))
-
-                x = Symbol('x')
+        if show == 'y':
+            try:
+                print('\nLoading graph. Might take some time on first startup ...')
+
+                x = np.linspace((-up - 8), (up + 8), 200000)
+
+                if 'ln' in function or 'log' in function:
+                    x = np.linspace(int(floor(low)) + 1, int(ceil(up)) + 8, 200000,)
+
+                y = [g(a) for a in x]
+                fig, ax = plt.subplots()
+
+                title = 'Shaded area beneath function'
+                plt.title(title)
+                plt.xlabel('x', weight='bold')
+                plt.ylabel('y', rotation=0, weight='bold')
+                plt.plot(x, y, color='red')
 
                 try:
-                    improper_area = Integral(f, (x, lbound, rbound)).principal_value()
+                    if graph_option == 'f':
+                        plt.axis([-7.5, 7.5, -7.5, 7.5])
 
-                    print('\nCalculated improper integral of', f, 'from', lbound, 'to', rbound, '. Final area is:\n')
-                    print_expr(improper_area)
+                    elif graph_option == 'a':
+                        if (float(g(low)) != 0) and (float(g(up)) != 0):
+                            plt.axis(
+                                [
+                                    low - 5,
+                                    up + 5,
+                                    float(g(round(low)))
+                                    - (
+                                        float(g(round(low)))
+                                        + float(g(round(up)))
+                                    )
+                                    / 2
+                                    - 1,
+                                    float(g(round(up)))
+                                    + (
+                                        float(g(round(low)))
+                                        + float(g(round(up)))
+                                    )
+                                    / 2
+                                    + 1,
+                                ]
+                            )
+                        elif (float(g(low)) == 0) or (float(g(up)) == 0):
+                            plt.axis(
+                                [
+                                    low - 5,
+                                    up + 5,
+                                    -(up - low) / 2,
+                                    (up + low) / 2,
+                                ]
+                            )
 
-                    if str(sp.simplify(improper_area, evaluate = False)) != str(improper_area):
-                        isimp = input('\nSimplification of answer found. Simplify? (y/n) ')
+                except:
+                    plt.axis([-7.5, 7.5, -7.5, 7.5])
 
-                        if isimp == 'y':
-                            print('\nSimplified:', improper_area, 'into:\n')
-                            print_expr(sp.simplify(improper_area, evaluate = False))
+                plt.grid()
 
-                except ValueError:
-                    logging.warn('ValueError: Singularity while computing improper integral.')
+                ix = np.linspace(low, up)
+                iy = [g(i) for i in ix]
+                verts = [(low, 0)] + list(zip(ix, iy)) + [(up, 0)]
+                poly = Polygon(verts, facecolor='blue')
+                ax.add_patch(poly)
 
+                plt.show()
+                return '\nExited graph.'
 
-            i_integrate()
-
-        elif cmd == 'exit':
-            print('\nExiting InteCalc ... ... ...')
-            break
+            except:
+                logging.warn('Could not graph function.')
 
         else:
-            logging.warn(f'Invalid command:"{cmd}"')
+            return '\nExiting Definite Integral Screen ... ... ...\n'
 
 
-def limcalc():
+def improper_integrate(function, low, up):
+    if 'pi' in function:
+        function = function.replace('pi', str(pi))
 
-    instruct_path = os.path.dirname(os.path.abspath(__file__))+'/texts/limcalc_instructs.txt'
-    limcalc = open(instruct_path, mode='r')
-    for line in limcalc.readlines():
-        line = line.rstrip()
-        print(line)
+    if '^' in function:
+        function = function.replace('^', '**')
+    else:
+        str(function)
 
-    while True:
+    if check_bound(low) is False:
+        return ''
 
-        try:
-            print('\n(Current Screen: LimCalc Main Screen)\n')
-            cmd = input('Enter Command: ')
+    if 'oo' in low:
+        low = eval(low)
+    else:
+        low = float(eval(replace_bound(low)))
 
-            if cmd == 'n':
-                print('\n(Current screen: Limit Screen)\n')
-                f = input('Enter a function: ')
+    if check_bound(up) is False:
+        return ''
 
-                if ('pi' in f):
-                    f = f.replace('pi', str(sp.core.numbers.pi))
+    if 'oo' in up:
+        up = eval(up)
+    else:
+        up = float(eval(replace_bound(up)))
 
-                if ('^' in f):
-                    f = f.replace('^', '**')
+    try:
+        improper_area = Integral(function, (x, low, up)).principal_value()
 
-                else:
-                    str(f)
+        print(f'Calculated improper integral of {function} from {low} to {up}. Final area is:\n')
+        print_expr(improper_area)
 
-                num = input('Enter the point of evaluation: ')
-
-                if (num.isnumeric() == False) and ('pi' not in num) and ('e' not in num) and ('-' not in num) and ('.' not in num) and ('oo' not in num) and ('sqrt' not in num):
-                    logging.error('TypeError: point of evaluation is a not a number.')
-
-                if ('pi' in num):
-                    num = num.replace('pi', str(sp.core.numbers.pi))
-                if ('e' in num):
-                    num = num.replace('e', str(E))
-
-                num = float(eval(num))
-
-                x = symbols('x')
-                l = limit(f, x, num)
-
-                if ('Limit' in str(l)):
-                    logging.warn('Cannot compute limit.')
-
-                else:
-                    print('\nLimit of',f,'as x approaches',num,'is:\n')
-                    print_expr(l)
-
-                    if str(sp.simplify(l, evaluate = False)) != str(l):
-                        lsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
-
-                        if lsimp == 'y':
-                            print('\nSimplified:', l, 'into:\n')
-                            print_expr(sp.simplify(l, evaluate = False))
-
-            elif cmd == 'o':
-                print('\n(Current screen: One-sided Limit Screen)\n')
-                f = input('Enter a function: ')
-
-                if ('pi' in f):
-                    f = f.replace('pi', str(sp.core.numbers.pi))
-
-                if ('^' in f):
-                    f = f.replace('^', '**')
-
-                else:
-                    str(f)
-
-                num = input('Enter the point of evaluation: ')
-
-                if (num.isnumeric() == False) and ('pi' not in num) and ('e' not in num) and ('-' not in num) and ('.' not in num) and ('oo' not in num) and ('sqrt' not in num):
-                    logging.error('TypeError: point of evaluation is a not a number.')
-
-                else:
-                    if ('pi' in num):
-                        num = num.replace('pi', str(sp.core.numbers.pi))
-                        
-                    if ('e' in num):
-                        num = num.replace('e', str(E))
-
-                    num = float(eval(num))
-                    direction = input('Enter direction to compute the limit ("left" or "right"): ')
-
-                    if (direction == 'left') or (direction == 'right'):
-
-                        if direction == 'left':
-                            direction_sign = '-'
-
-                        elif direction == 'right':
-                            direction_sign = '+'
-
-                        x = symbols('x')
-                        l = limit(f, x, num, dir = direction_sign)
-
-                        if ('Limit' in str(l)):
-                            print('\nCannot compute limit.')
-
-                        else:
-                            print('\nLimit of',f,'as x approaches',num,'from the', direction, 'is:\n')
-                            print_expr(l)
-
-                            if str(sp.simplify(l, evaluate = False)) != str(l):
-                                lsimp = input('\nSimplification of answer found. Simplify? (y/n) ')
-                                
-                                if lsimp == 'y':
-                                    print('\nSimplified:', l, 'into:\n')
-                                    print_expr(sp.simplify(l, evaluate = False))
-
-                    else:
-                        print('\nTypeError: Direction is not right or left.')
-
-            elif cmd == 'exit':
-                print('\nExiting LimCalc ... ... ...')
-                break
-
-            else:
-                logging.warn(f'Invalid command:"{cmd}"')
-                
-        except:
-            logging.error('UnknownError: An unknown error occured.')
+    except ValueError:
+        logging.warn('ValueError: Singularity while computing improper integral.\n')
 
 
-def open_settings():
+def normal_limit(expr, value):
+    print('\n(Current screen: Limit Screen)\n')
 
-    settings_path = os.path.dirname(os.path.abspath(__file__))+'/texts/settings.txt'
+    if 'pi' in expr:
+        expr = expr.replace('pi', str(pi))
+
+    if '^' in expr:
+        expr = expr.replace('^', '**')
+    
+    if check_bound(value) is False:
+        return ''
+
+    value = float(eval(replace_bound(value)))
+
+    l = limit(expr, x, value)
+
+    if 'Limit' in str(l):
+        logging.warn('Cannot compute limit.')
+
+    else:
+        print(f'\nLimit of {expr} as x approaches {value} is:\n')
+        print_expr(l)
+        if check_simp(l) is True:
+            print('\nSimplify/rewrite:\n')
+            print_expr(simplify(l, evaluate=False))
+
+
+def one_side_limit(expr, value, direction):
+    print('\n(Current screen: One-sided Limit Screen)\n')
+
+    if 'pi' in expr:
+        expr = expr.replace('pi', str(pi))
+
+    if '^' in expr:
+        expr = expr.replace('^', '**')
+
+    if check_bound(value) is False:
+        return ''
+
+    value = float(eval(replace_bound(value)))
+
+    if direction == 'left':
+        direction_sign = '-'
+
+    elif direction == 'right':
+        direction_sign = '+'
+
+    else:
+        logging.error('\nTypeError: Direction is neither right or left.')
+        return ''
+
+    l = limit(expr, x, value, dir=direction_sign)
+
+    if 'Limit' in str(l):
+        logging.warn('\nCannot compute limit.')
+
+    else:
+        print(f'\nLimit of {expr} as x approaches {value} from the {direction} is:\n')
+        print_expr(l)
+
+
+def check_simp(expr):
+    if str(simplify(expr, evaluate=False)) != str(expr):
+        return True
+    else:
+        return False
+
+
+def check_order(order):
+    if ('.' in order) or (order.isnumeric() == False) or (int(order) <= 0):
+        logging.error('OrderError: Order of derivative calculation is not a valid number.')
+        return False
+    else:
+        return True
+
+
+def check_bound(bound):
+    if (
+        (bound.isnumeric() is False)
+        and ('pi' not in bound)
+        and ('e' not in bound)
+        and ('-' not in bound)
+        and ('.' not in bound)
+        and ('sqrt' not in bound)
+        and ('oo' not in bound)
+    ):
+        logging.error('TypeError: Integration bound is a not a number.')
+        return False
+    else:
+        return True
+
+
+def replace_bound(bound):
+    if 'pi' in bound:
+        bound = bound.replace('pi', str(pi))
+    if 'e' in bound:
+        bound = bound.replace('e', str(E))
+    return bound
+
+
+def g(x):
+    final = eval(di_function)
+    return final
+
+
+def settings():
+    settings_path = os.path.dirname(os.path.abspath(__file__)) + '/texts/settings.txt'
     settings = open(settings_path, mode='r')
 
     for line in settings.readlines():
         line = line.rstrip()
         print(line)
-    
+
     while True:
 
         print('\n(Current Screen: Settings Screen)\n')
@@ -522,15 +344,22 @@ def open_settings():
             print('\n(Current Screen: Print Settings Screen)\n')
 
             global print_option
-            print_option = input("Set print mode: 'p' (Sympy Pretty Print) or 'n' (Normal Print): ")
+            print_option = input('Set print mode: "p" (Sympy Pretty Print) or "n" (Normal Print): ')
             print(f'\nPrinting mode set to: "{print_option}"')
 
         elif cmd == 'graph':
             print('\n(Current Screen: Graph Settings Screen)\n')
 
             global graph_option
-            graph_option = input("Set graph mode: 'f' (Fixed graph view) or 'a' (Adjusted graph view): ")
+            graph_option = input('Set graph mode: "f" (Fixed graph view) or "a" (Adjusted graph view): ')
             print(f'\nGraph mode set to: "{graph_option}"')
+
+        elif cmd == 'date':
+            print('\n(Current Screen: Date Settings Screen)\n')
+
+            global date_option
+            date_option = input('Set date mode: "1" (YY/MM/DD) or "2" (YY/MM/DD/HH/MM/SS): ')
+            print(f'\nDate mode set to: "{date_option}"')
 
         elif cmd == 'exit':
             print('\nExiting settings ... ... ...')
@@ -541,17 +370,177 @@ def open_settings():
 
 
 def print_expr(text):
-
-    printing_methods = {
-        'p': lambda t: pprint(text),
-        'n': lambda t: print(text)
-    }
+    printing_methods = {'p': lambda t: pprint(text), 'n': lambda t: print(text)}
 
     try:
         printing_methods[print_option](text)
-    
+
     except NameError:
         printing_methods['p'](text)
+
+
+def main():
+    global x, y, z
+    x, y, z = symbols('x,y,z')
+
+    instruct_path = os.path.dirname(os.path.abspath(__file__)) + '/texts/main_screen.txt'
+    main = open(instruct_path, mode='r')
+    for line in main.readlines():
+        line = line.rstrip()
+        print(line)
+
+    warnings.filterwarnings('ignore')
+
+    while True:
+        try:
+            now = (datetime.datetime.now()).strftime('%Y/%m/%d %H:%M:%S')
+        except:
+            now = (datetime.datetime.now()).strftime('%Y/%m/%d')
+
+        print(f'\n(Time now is: {now})')
+        print('(Current Screen: Main Screen)\n')
+        cmd = input('Enter Command: ')
+
+        if cmd == '1':
+            derivacalc()
+
+        elif cmd == '2':
+            intecalc()
+
+        elif cmd == '3':
+            limcalc()
+
+        elif cmd == '4':
+            settings()
+
+        elif cmd == '5':
+            print('\nExiting Calc-ULTRA ... ... ...\n')
+            break
+
+        else:
+            logging.warn(f'Invalid command:"{cmd}"\n')
+
+
+'''
+If you find this message, type 'hi' in the general discussions - sudoer-Huatao
+'''
+
+
+def derivacalc():
+    instruct_path = os.path.dirname(os.path.abspath(__file__)) + '/texts/derivacalc_instructs.txt'
+    derivacalc = open(instruct_path, mode='r')
+
+    while True:
+        for line in derivacalc.readlines():
+            line = line.rstrip()
+            print(line)
+        print('\n(Current Screen: DerivaCalc Main Screen)\n')
+        cmd = input('Enter Command: ')
+
+        if cmd == '1':
+            print('\n(Current Screen: Derivative Screen)\n')
+            function = input('Enter a function: ')
+            order = input('Enter order of derivative calculation: ')
+            derive(function, order)
+
+        elif cmd == '2':
+            print('\n(Current Screen: Partial Derivative Screen)\n')
+            function = input('Enter a function containing x and y or x and y and z: ')
+            var = input('Enter variable to differentiate in respect to: ')
+            if var != 'x' and var != 'y' and var !='z':
+                logging.error('Variable to differentite in respect to is invalid.')
+            else:
+                order = input('Enter the order of partial derivative calculation: ')
+                partial_derive(function, var, order)
+
+        elif cmd == '3':
+            print('\n(Current Screen: Implicit Derivative Screen)\n')
+            circ = input('Enter the left side of an equation containing x and y: (right side default as 0) ')
+            order = input('Enter order of implicit derivative calculation: ')
+            implicit_derive(circ, order)
+
+        elif cmd == '4':
+            print('\nExiting DerivaCalc ... ... ...')
+            break
+
+        else:
+            logging.warn(f'Invalid command:"{cmd}"')
+
+
+def intecalc():
+    instruct_path = os.path.dirname(os.path.abspath(__file__)) + '/texts/intecalc_instructs.txt'
+    intecalc = open(instruct_path, mode='r')
+    for line in intecalc.readlines():
+        line = line.rstrip()
+        print(line)
+
+    while True:
+        for line in intecalc.readlines():
+            line = line.rstrip()
+            print(line)
+        print('(Current Screen: InteCalc Main Screen)\n')
+        cmd = input('Enter Command: ')
+
+        if cmd == '1':
+            print('\n(Current Screen: Definite Integral Screen)\n')
+            function = input('Enter a function: ')
+            antiderive(function)
+
+        elif cmd == '2':
+            print('\n(Current Screen: Definite Integral Screen)\n')
+            global di_function
+            di_function = input('Enter a function: ')
+            lower_bound = input('\nEnter the lower bound: ')
+            upper_bound = input('Enter the upper bound: ')
+            print(definite_integrate(di_function, lower_bound, upper_bound))
+
+        elif cmd == '3':
+            print('\n(Current Screen: Improper Integral Screen)\n')
+            function = input('Enter a function: ')
+            lower_bound = input('\nEnter the lower bound: ')
+            upper_bound = input('Enter the upper bound: ')
+            improper_integrate(function, lower_bound, upper_bound)
+
+        elif cmd == '4':
+            print('\nExiting InteCalc ... ... ...')
+            break
+
+        else:
+            logging.warn(f'Invalid command: "{cmd}"')
+
+
+def limcalc():
+    instruct_path = os.path.dirname(os.path.abspath(__file__)) + '/texts/limcalc_instructs.txt'
+    limcalc = open(instruct_path, mode='r')
+    for line in limcalc.readlines():
+        line = line.rstrip()
+        print(line)
+
+    while True:
+        try:
+            print('\n(Current Screen: LimCalc Main Screen)\n')
+            cmd = input('Enter Command: ')
+
+            if cmd == '1':
+                expr = input('Enter an expression: ')
+                value = input('Enter point of evaluation: ')
+                normal_limit(expr, value)
+
+            elif cmd == '2':
+                expr = input('Enter an expression: ')
+                value = input('Enter point of evaluation: ')
+                direction = input("Enter direction of limit ('left' or 'right'): ")
+                one_side_limit(expr, value, direction)
+
+            elif cmd == '3':
+                print('\nExiting LimCalc ... ... ...')
+                break
+
+            else:
+                logging.warn(f'Invalid command: "{cmd}"')
+
+        except:
+            logging.error('UnknownError: An unknown error occured.')
 
 
 main()
