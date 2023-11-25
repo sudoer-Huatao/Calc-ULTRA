@@ -13,10 +13,10 @@
 
 Commands:
  
- - Type 'a' in the main screen to calculate antiderivatives (indefinite integrals);
- - Type 'd' in the main screen to calculate definite integrals - with a graph!
- - Type 'i' in the main screen to calculate improper integrals;
- - Type 'exit' to quit InteCalc
+--> 1: Calculate antiderivative
+--> 2: Calculate definite integral
+--> 3: Calculate improper integral
+--> 4: Exit InteCalc
 
-(This version only supports single variable calculus)
-(Absolute value function and factorial function is only supported by definite integral computation!)
+(Absolute value function and factorial function is only supported by definite integral computation)
+ 
