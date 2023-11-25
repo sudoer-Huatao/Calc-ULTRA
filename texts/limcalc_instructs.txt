@@ -13,6 +13,6 @@
 
 Commands:
  
- - Type 'n' in the main screen to calculate normal limits;
- - Type 'o' in the main screen to calculate one-sided limits;
- - Type 'exit' to quit LimCalc.
+--> 1: Calculate normal limit
+--> 2: Calculate one-sided limit
+--> 3: Exit LimCalc
