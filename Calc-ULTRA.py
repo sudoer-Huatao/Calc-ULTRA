@@ -20,7 +20,7 @@ def derive(function, order):
         df = diff(function, x, order)
 
         print(f'\nDerivative of {function} with order {order} is:\n')
-        return print_expr(df)
+        print_expr(df)
 
         if check_simp(df) is True:
             print('\nSimplify/rewrite:\n')
@@ -67,7 +67,7 @@ def antiderive(function):
     F = Integral(function, x).doit()
 
     if 'Integral' in str(F):
-        logging.warn('Cannot compute integral.')
+        logging.warn('Cannot compute integral.\n')
 
     else:
         print('\nAntiderivative is:\n')
@@ -77,7 +77,7 @@ def antiderive(function):
             print('\nSimplify/rewrite:\n')
             print_expr(simplify(F, evaluate=False))
 
-        print("\nDon't forget to add a constant!")
+        print("\nDon't forget to add a constant!\n")
 
 
 def definite_integrate(function, low, up):
@@ -217,6 +217,7 @@ def improper_integrate(function, low, up):
 
         print(f'Calculated improper integral of {function} from {low} to {up}. Final area is:\n')
         print_expr(improper_area)
+        print()
 
     except ValueError:
         logging.warn('ValueError: Singularity while computing improper integral.\n')
@@ -230,7 +231,7 @@ def normal_limit(expr, value):
 
     if '^' in expr:
         expr = expr.replace('^', '**')
-    
+
     if check_bound(value) is False:
         return ''
 
@@ -393,9 +394,12 @@ def main():
 
     while True:
         try:
-            now = (datetime.datetime.now()).strftime('%Y/%m/%d %H:%M:%S')
+            if date_option == '1':
+                now = (datetime.datetime.now()).strftime('%Y/%m/%d')
+            elif date_option == '2':
+                now = (datetime.datetime.now()).strftime('%Y/%m/%d %H:%M:%S')
         except:
-            now = (datetime.datetime.now()).strftime('%Y/%m/%d')
+            now = (datetime.datetime.now()).strftime('%Y/%m/%d %H:%M:%S')
 
         print(f'\n(Time now is: {now})')
         print('(Current Screen: Main Screen)\n')
@@ -429,11 +433,11 @@ If you find this message, type 'hi' in the general discussions - sudoer-Huatao
 def derivacalc():
     instruct_path = os.path.dirname(os.path.abspath(__file__)) + '/texts/derivacalc_instructs.txt'
     derivacalc = open(instruct_path, mode='r')
+    for line in derivacalc.readlines():
+        line = line.rstrip()
+        print(line)
 
     while True:
-        for line in derivacalc.readlines():
-            line = line.rstrip()
-            print(line)
         print('\n(Current Screen: DerivaCalc Main Screen)\n')
         cmd = input('Enter Command: ')
 
@@ -475,14 +479,11 @@ def intecalc():
         print(line)
 
     while True:
-        for line in intecalc.readlines():
-            line = line.rstrip()
-            print(line)
         print('(Current Screen: InteCalc Main Screen)\n')
         cmd = input('Enter Command: ')
 
         if cmd == '1':
-            print('\n(Current Screen: Definite Integral Screen)\n')
+            print('\n(Current Screen: Antiderivative Screen)\n')
             function = input('Enter a function: ')
             antiderive(function)
 
