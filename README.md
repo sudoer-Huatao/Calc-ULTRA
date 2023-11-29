@@ -35,6 +35,10 @@ This should resolve the issue. 😅
 
 Due to limitations of the SymPy module, SOME FUNCTIONS CAN NOT BE INTEGRATED. The Error Function erf(x) can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't. 😟
 
+# Test PYPI
+
+This project is on Test PYPI. View on https://test.pypi.org/project/calc-ultra/. The official repo of the module version of Calc-ULTRA is here: https://github.com/sudoer-Huatao/calc_ultra/tree/main.
+
 # Acknowledgements
 
 
