@@ -308,6 +308,7 @@ def check_bound(bound):
         and ('.' not in bound)
         and ('sqrt' not in bound)
         and ('oo' not in bound)
+        and ('/' not in bound)
     ):
         logging.error('TypeError: Integration bound is a not a number.')
         return False
