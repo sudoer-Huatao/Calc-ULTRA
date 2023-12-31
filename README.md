@@ -1,20 +1,42 @@
-# Calc-ULTRA: Calculus Calculator
+# calc-ultra
 
-[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) 
+[![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) [![Version](https://img.shields.io/badge/Version-1.2.1-blue.svg)](https://github.com/sudoer-Huatao/Calc-ULTRA_Calculus-Calculator)
 
 > **Calculus made easy**
 
-This is a multi-functional, user-friendly Calculus Calculator!
+The Calc-ULTRA calculus calculator, but as a module!
 
-- Little Python background knowledge needed.
-- Supports derivatives, antiderivatives, and definite integrals - with a graph!
-- (Please FULL SCREEN your console/terminal for better experience!)
+- Little Python background knowledge needed!
 
+Supports:
+
+- Derivatives
+- Partials
+- Implicit differentiation
+- Antiderivatives
+- Definite integrals
+- Improper integrals
+
+**NEW SINCE V1.2.1:** Graphs for differentiation and integrals are supported!
 
 ## Note
 
-This is the Python script of the Calc-ULTRA calculator. For the Python package, visit https://github.com/sudoer-Huatao/calc_ultra. Most updates will be based there.
+This is the module package of the Calc-ULTRA calculator. For the Python script of this package, visit <https://github.com/sudoer-Huatao/Calc-ULTRA>
 
+## Installation and Running
+
+> Run the calculus calculator with a single line of code
+
+Command line: `pip install calc-ultra`.
+To run the calculator, import Calc-ULTRA as `calc_ultra` like so:
+
+`from calc_ultra import main`
+
+Make sure you have the latest version installed. For example, if the latest version is 1.0.2, type `pip install calc-ultra==1.0.2` to reinstall the module.
+
+Demo (version used: v1.0.1):
+
+<https://github.com/sudoer-Huatao/calc_ultra/assets/135504586/17170f6e-4d7a-42ef-8d1d-121cde82f26a>
 
 ## Requirements
 
@@ -22,22 +44,13 @@ This program requires the `sympy`,  `numpy`, and `matplotlib` modules installed.
 
 ## Warnings
 
-### Error Messages
-
-If your computer returns this error:
-
-PermissionError: [Errno 1] Operation not permitted: '/Users/YOUR_USERNAME/../Calc-ULTRA_Calculus-Calculator-main/texts/main_screen.txt'
-
-Please ensure that your current directory is the "Calc-ULTRA_Calculus-Calculator-main" folder, then run this command in the terminal to resolve the error:
-
-`sudo python3 Calc-ULTRA.py`
-
-This should resolve the issue. 😅
-
 ### Function limitations
 
 Due to limitations of the SymPy module, **some functions cannot be integrated**. The Error Function `erf(x)` can be integrated in both indefinite integral and definite integral calculation, but the Absolute Value and Factorial functions are only available to definite integral calculations. Also, the factorial function cannot be graphed properly. Integration of composed functions are also limited due to SymPy limitations. While some composed functions work, others don't. 😟
 
+## Test PYPI
+
+Previous test version of this project is on Test PYPI. View on <https://test.pypi.org/project/calc-ultra/>.
 
 ## Acknowledgements
 
