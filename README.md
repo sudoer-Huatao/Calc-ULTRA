@@ -1,4 +1,6 @@
-# calc-ultra
+# (UNMAINTAINED REPO)calc-ultra
+
+Visit <https://github.com/sudoer-Huatao/calc_ultra> for more info.
 
 [![GPLv3 License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/)
 
@@ -21,7 +23,7 @@ Supports:
 
 ## Note
 
-This is the module package of the Calc-ULTRA calculator. For the Python script of this package, visit <https://github.com/sudoer-Huatao/Calc-ULTRA>
+This is the module package of the Calc-ULTRA calculator. For the Python script of this package, visit <https://github.com/sudoer-Huatao/calc_ultra>
 
 ## Installation and Running
 
